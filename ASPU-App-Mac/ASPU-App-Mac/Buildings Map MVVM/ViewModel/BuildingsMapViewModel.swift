@@ -37,8 +37,6 @@ final class BuildingsMapViewModel: ObservableObject {
                         }
                     }
                 }
-            } else {
-                fatalError()
             }
         }
     }
