@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E3E2C6CDC9200E6598E /* Buildings.swift */; };
+		82925E412C6CDCCD00E6598E /* BuildingsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E402C6CDCCD00E6598E /* BuildingsMapView.swift */; };
+		82925E432C6CDD2F00E6598E /* BuildingsMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E422C6CDD2F00E6598E /* BuildingsMapViewModel.swift */; };
+		82925E462C6CDDA800E6598E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E452C6CDDA800E6598E /* LocationManager.swift */; };
 		82FFE13F2C6C17A800103B06 /* ASPU_App_MacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */; };
 		82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1402C6C17A800103B06 /* ContentView.swift */; };
 		82FFE1432C6C17AC00103B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FFE1422C6C17AC00103B06 /* Assets.xcassets */; };
@@ -32,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82925E3E2C6CDC9200E6598E /* Buildings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildings.swift; sourceTree = "<group>"; };
+		82925E402C6CDCCD00E6598E /* BuildingsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsMapView.swift; sourceTree = "<group>"; };
+		82925E422C6CDD2F00E6598E /* BuildingsMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsMapViewModel.swift; sourceTree = "<group>"; };
+		82925E452C6CDDA800E6598E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		82FFE13B2C6C17A800103B06 /* ASPU-App-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ASPU-App-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPU_App_MacApp.swift; sourceTree = "<group>"; };
 		82FFE1402C6C17A800103B06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +78,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82925E3A2C6CDC3D00E6598E /* Buildings Map MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				82925E3D2C6CDC7E00E6598E /* Model */,
+				82925E3C2C6CDC7B00E6598E /* View */,
+				82925E3B2C6CDC7900E6598E /* ViewModel */,
+			);
+			path = "Buildings Map MVVM";
+			sourceTree = "<group>";
+		};
+		82925E3B2C6CDC7900E6598E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				82925E422C6CDD2F00E6598E /* BuildingsMapViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		82925E3C2C6CDC7B00E6598E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82925E402C6CDCCD00E6598E /* BuildingsMapView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		82925E3D2C6CDC7E00E6598E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				82925E3E2C6CDC9200E6598E /* Buildings.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		82925E442C6CDD8800E6598E /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				82925E452C6CDDA800E6598E /* LocationManager.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		82FFE1322C6C17A700103B06 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +142,7 @@
 				82FFE14D2C6C1A3E00103B06 /* Services */,
 				82FFE16B2C6C1C9000103B06 /* Models */,
 				82FFE1652C6C1C2700103B06 /* News Modules */,
+				82925E3A2C6CDC3D00E6598E /* Buildings Map MVVM */,
 				82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */,
 				82FFE1402C6C17A800103B06 /* ContentView.swift */,
 				82FFE17E2C6C1F4300103B06 /* Info.plist */,
@@ -113,6 +164,7 @@
 		82FFE14D2C6C1A3E00103B06 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				82925E442C6CDD8800E6598E /* Location */,
 				82FFE1702C6C1CD400103B06 /* Settings */,
 				82FFE14E2C6C1A4400103B06 /* API */,
 			);
@@ -316,6 +368,7 @@
 				82FFE1612C6C1BF600103B06 /* TimeTableService.swift in Sources */,
 				82FFE17A2C6C1DBE00103B06 /* WeekModel.swift in Sources */,
 				82FFE1722C6C1CDF00103B06 /* SettingsManager.swift in Sources */,
+				82925E412C6CDCCD00E6598E /* BuildingsMapView.swift in Sources */,
 				82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */,
 				82FFE1742C6C1D0200103B06 /* NewsListView.swift in Sources */,
 				82FFE1572C6C1B8700103B06 /* NewsResponse.swift in Sources */,
@@ -326,8 +379,11 @@
 				82FFE16F2C6C1CBA00103B06 /* NewsCategories.swift in Sources */,
 				82FFE1532C6C1B1500103B06 /* HostName.swift in Sources */,
 				82FFE16A2C6C1C5900103B06 /* NewsListViewModel.swift in Sources */,
+				82925E462C6CDDA800E6598E /* LocationManager.swift in Sources */,
+				82925E432C6CDD2F00E6598E /* BuildingsMapViewModel.swift in Sources */,
 				82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */,
 				82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */,
+				82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */,
 				82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */,
 				82FFE15F2C6C1BE100103B06 /* ASPUNewsService.swift in Sources */,
 				82FFE1762C6C1D8E00103B06 /* ArticleInfo.swift in Sources */,
