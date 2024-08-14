@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		82FFE13F2C6C17A800103B06 /* ASPU_App_MacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */; };
+		82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1402C6C17A800103B06 /* ContentView.swift */; };
+		82FFE1432C6C17AC00103B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FFE1422C6C17AC00103B06 /* Assets.xcassets */; };
+		82FFE1462C6C17AC00103B06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FFE1452C6C17AC00103B06 /* Preview Assets.xcassets */; };
+		82FFE1532C6C1B1500103B06 /* HostName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1522C6C1B1500103B06 /* HostName.swift */; };
+		82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1542C6C1B2B00103B06 /* Discipline.swift */; };
+		82FFE1572C6C1B8700103B06 /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1562C6C1B8700103B06 /* NewsResponse.swift */; };
+		82FFE1592C6C1B9600103B06 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1582C6C1B9600103B06 /* Article.swift */; };
+		82FFE15B2C6C1BB200103B06 /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE15A2C6C1BB200103B06 /* TimeTable.swift */; };
+		82FFE15F2C6C1BE100103B06 /* ASPUNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE15E2C6C1BE100103B06 /* ASPUNewsService.swift */; };
+		82FFE1612C6C1BF600103B06 /* TimeTableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1602C6C1BF600103B06 /* TimeTableService.swift */; };
+		82FFE1642C6C1C1700103B06 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 82FFE1632C6C1C1700103B06 /* Alamofire */; };
+		82FFE16A2C6C1C5900103B06 /* NewsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1692C6C1C5900103B06 /* NewsListViewModel.swift */; };
+		82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE16C2C6C1CA800103B06 /* NewsCategoryModel.swift */; };
+		82FFE16F2C6C1CBA00103B06 /* NewsCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE16E2C6C1CBA00103B06 /* NewsCategories.swift */; };
+		82FFE1722C6C1CDF00103B06 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1712C6C1CDF00103B06 /* SettingsManager.swift */; };
+		82FFE1742C6C1D0200103B06 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1732C6C1D0200103B06 /* NewsListView.swift */; };
+		82FFE1762C6C1D8E00103B06 /* ArticleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1752C6C1D8E00103B06 /* ArticleInfo.swift */; };
+		82FFE1782C6C1DAB00103B06 /* FacultyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1772C6C1DAB00103B06 /* FacultyModel.swift */; };
+		82FFE17A2C6C1DBE00103B06 /* WeekModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1792C6C1DBE00103B06 /* WeekModel.swift */; };
+		82FFE17D2C6C1EAA00103B06 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 82FFE17C2C6C1EAA00103B06 /* SDWebImageSwiftUI */; };
+		82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1802C6C2EDF00103B06 /* ArticleCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		82FFE13B2C6C17A800103B06 /* ASPU-App-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ASPU-App-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPU_App_MacApp.swift; sourceTree = "<group>"; };
+		82FFE1402C6C17A800103B06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		82FFE1422C6C17AC00103B06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		82FFE1452C6C17AC00103B06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		82FFE1472C6C17AC00103B06 /* ASPU_App_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASPU_App_Mac.entitlements; sourceTree = "<group>"; };
+		82FFE1522C6C1B1500103B06 /* HostName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostName.swift; sourceTree = "<group>"; };
+		82FFE1542C6C1B2B00103B06 /* Discipline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discipline.swift; sourceTree = "<group>"; };
+		82FFE1562C6C1B8700103B06 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
+		82FFE1582C6C1B9600103B06 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		82FFE15A2C6C1BB200103B06 /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
+		82FFE15E2C6C1BE100103B06 /* ASPUNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPUNewsService.swift; sourceTree = "<group>"; };
+		82FFE1602C6C1BF600103B06 /* TimeTableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableService.swift; sourceTree = "<group>"; };
+		82FFE1692C6C1C5900103B06 /* NewsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewModel.swift; sourceTree = "<group>"; };
+		82FFE16C2C6C1CA800103B06 /* NewsCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCategoryModel.swift; sourceTree = "<group>"; };
+		82FFE16E2C6C1CBA00103B06 /* NewsCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCategories.swift; sourceTree = "<group>"; };
+		82FFE1712C6C1CDF00103B06 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		82FFE1732C6C1D0200103B06 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
+		82FFE1752C6C1D8E00103B06 /* ArticleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfo.swift; sourceTree = "<group>"; };
+		82FFE1772C6C1DAB00103B06 /* FacultyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacultyModel.swift; sourceTree = "<group>"; };
+		82FFE1792C6C1DBE00103B06 /* WeekModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekModel.swift; sourceTree = "<group>"; };
+		82FFE17E2C6C1F4300103B06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		82FFE1802C6C2EDF00103B06 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82FFE1382C6C17A800103B06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82FFE17D2C6C1EAA00103B06 /* SDWebImageSwiftUI in Frameworks */,
+				82FFE1642C6C1C1700103B06 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		82FFE1322C6C17A700103B06 = {
+			isa = PBXGroup;
+			children = (
+				82FFE13D2C6C17A800103B06 /* ASPU-App-Mac */,
+				82FFE13C2C6C17A800103B06 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		82FFE13C2C6C17A800103B06 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE13B2C6C17A800103B06 /* ASPU-App-Mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82FFE13D2C6C17A800103B06 /* ASPU-App-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE14D2C6C1A3E00103B06 /* Services */,
+				82FFE16B2C6C1C9000103B06 /* Models */,
+				82FFE1652C6C1C2700103B06 /* News Modules */,
+				82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */,
+				82FFE1402C6C17A800103B06 /* ContentView.swift */,
+				82FFE17E2C6C1F4300103B06 /* Info.plist */,
+				82FFE1422C6C17AC00103B06 /* Assets.xcassets */,
+				82FFE1472C6C17AC00103B06 /* ASPU_App_Mac.entitlements */,
+				82FFE1442C6C17AC00103B06 /* Preview Content */,
+			);
+			path = "ASPU-App-Mac";
+			sourceTree = "<group>";
+		};
+		82FFE1442C6C17AC00103B06 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1452C6C17AC00103B06 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		82FFE14D2C6C1A3E00103B06 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1702C6C1CD400103B06 /* Settings */,
+				82FFE14E2C6C1A4400103B06 /* API */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		82FFE14E2C6C1A4400103B06 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1512C6C1AC900103B06 /* Host Name */,
+				82FFE14F2C6C1A4B00103B06 /* Models */,
+				82FFE1502C6C1ABE00103B06 /* Services */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		82FFE14F2C6C1A4B00103B06 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1562C6C1B8700103B06 /* NewsResponse.swift */,
+				82FFE1582C6C1B9600103B06 /* Article.swift */,
+				82FFE15A2C6C1BB200103B06 /* TimeTable.swift */,
+				82FFE1542C6C1B2B00103B06 /* Discipline.swift */,
+				82FFE1752C6C1D8E00103B06 /* ArticleInfo.swift */,
+				82FFE1772C6C1DAB00103B06 /* FacultyModel.swift */,
+				82FFE1792C6C1DBE00103B06 /* WeekModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		82FFE1502C6C1ABE00103B06 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE15D2C6C1BCE00103B06 /* News */,
+				82FFE15C2C6C1BCC00103B06 /* Timetable */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		82FFE1512C6C1AC900103B06 /* Host Name */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1522C6C1B1500103B06 /* HostName.swift */,
+			);
+			path = "Host Name";
+			sourceTree = "<group>";
+		};
+		82FFE15C2C6C1BCC00103B06 /* Timetable */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1602C6C1BF600103B06 /* TimeTableService.swift */,
+			);
+			path = Timetable;
+			sourceTree = "<group>";
+		};
+		82FFE15D2C6C1BCE00103B06 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE15E2C6C1BE100103B06 /* ASPUNewsService.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		82FFE1652C6C1C2700103B06 /* News Modules */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1662C6C1C3200103B06 /* News List MVVM */,
+			);
+			path = "News Modules";
+			sourceTree = "<group>";
+		};
+		82FFE1662C6C1C3200103B06 /* News List MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1682C6C1C4100103B06 /* View */,
+				82FFE17F2C6C2ED300103B06 /* Cell */,
+				82FFE1672C6C1C3F00103B06 /* ViewModel */,
+			);
+			path = "News List MVVM";
+			sourceTree = "<group>";
+		};
+		82FFE1672C6C1C3F00103B06 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1692C6C1C5900103B06 /* NewsListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		82FFE1682C6C1C4100103B06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1732C6C1D0200103B06 /* NewsListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		82FFE16B2C6C1C9000103B06 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE16C2C6C1CA800103B06 /* NewsCategoryModel.swift */,
+				82FFE16E2C6C1CBA00103B06 /* NewsCategories.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		82FFE1702C6C1CD400103B06 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1712C6C1CDF00103B06 /* SettingsManager.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		82FFE17F2C6C2ED300103B06 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				82FFE1802C6C2EDF00103B06 /* ArticleCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82FFE13A2C6C17A800103B06 /* ASPU-App-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82FFE14A2C6C17AC00103B06 /* Build configuration list for PBXNativeTarget "ASPU-App-Mac" */;
+			buildPhases = (
+				82FFE1372C6C17A800103B06 /* Sources */,
+				82FFE1382C6C17A800103B06 /* Frameworks */,
+				82FFE1392C6C17A800103B06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ASPU-App-Mac";
+			packageProductDependencies = (
+				82FFE1632C6C1C1700103B06 /* Alamofire */,
+				82FFE17C2C6C1EAA00103B06 /* SDWebImageSwiftUI */,
+			);
+			productName = "ASPU-App-Mac";
+			productReference = 82FFE13B2C6C17A800103B06 /* ASPU-App-Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82FFE1332C6C17A700103B06 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					82FFE13A2C6C17A800103B06 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+				};
+			};
+			buildConfigurationList = 82FFE1362C6C17A700103B06 /* Build configuration list for PBXProject "ASPU-App-Mac" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82FFE1322C6C17A700103B06;
+			packageReferences = (
+				82FFE1622C6C1C1700103B06 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				82FFE17B2C6C1EAA00103B06 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
+			productRefGroup = 82FFE13C2C6C17A800103B06 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82FFE13A2C6C17A800103B06 /* ASPU-App-Mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82FFE1392C6C17A800103B06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82FFE1462C6C17AC00103B06 /* Preview Assets.xcassets in Resources */,
+				82FFE1432C6C17AC00103B06 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82FFE1372C6C17A800103B06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82FFE1612C6C1BF600103B06 /* TimeTableService.swift in Sources */,
+				82FFE17A2C6C1DBE00103B06 /* WeekModel.swift in Sources */,
+				82FFE1722C6C1CDF00103B06 /* SettingsManager.swift in Sources */,
+				82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */,
+				82FFE1742C6C1D0200103B06 /* NewsListView.swift in Sources */,
+				82FFE1572C6C1B8700103B06 /* NewsResponse.swift in Sources */,
+				82FFE15B2C6C1BB200103B06 /* TimeTable.swift in Sources */,
+				82FFE1782C6C1DAB00103B06 /* FacultyModel.swift in Sources */,
+				82FFE1592C6C1B9600103B06 /* Article.swift in Sources */,
+				82FFE13F2C6C17A800103B06 /* ASPU_App_MacApp.swift in Sources */,
+				82FFE16F2C6C1CBA00103B06 /* NewsCategories.swift in Sources */,
+				82FFE1532C6C1B1500103B06 /* HostName.swift in Sources */,
+				82FFE16A2C6C1C5900103B06 /* NewsListViewModel.swift in Sources */,
+				82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */,
+				82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */,
+				82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */,
+				82FFE15F2C6C1BE100103B06 /* ASPUNewsService.swift in Sources */,
+				82FFE1762C6C1D8E00103B06 /* ArticleInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		82FFE1482C6C17AC00103B06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		82FFE1492C6C17AC00103B06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		82FFE14B2C6C17AC00103B06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ASPU-App-Mac/ASPU_App_Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ASPU-App-Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = 265GKHT32M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ASPU-App-Mac/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ФГБОУ ВО «АГПУ»";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ASPU-App-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		82FFE14C2C6C17AC00103B06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ASPU-App-Mac/ASPU_App_Mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ASPU-App-Mac/Preview Content\"";
+				DEVELOPMENT_TEAM = 265GKHT32M;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ASPU-App-Mac/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "ФГБОУ ВО «АГПУ»";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ASPU-App-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82FFE1362C6C17A700103B06 /* Build configuration list for PBXProject "ASPU-App-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82FFE1482C6C17AC00103B06 /* Debug */,
+				82FFE1492C6C17AC00103B06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82FFE14A2C6C17AC00103B06 /* Build configuration list for PBXNativeTarget "ASPU-App-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82FFE14B2C6C17AC00103B06 /* Debug */,
+				82FFE14C2C6C17AC00103B06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		82FFE1622C6C1C1700103B06 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = exactVersion;
+				version = 5.9.1;
+			};
+		};
+		82FFE17B2C6C1EAA00103B06 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		82FFE1632C6C1C1700103B06 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82FFE1622C6C1C1700103B06 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		82FFE17C2C6C1EAA00103B06 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82FFE17B2C6C1EAA00103B06 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 82FFE1332C6C17A700103B06 /* Project object */;
+}
