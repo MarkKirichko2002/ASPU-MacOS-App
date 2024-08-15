@@ -23,7 +23,6 @@ final class NewsListViewModel: ObservableObject {
     private let settingsManager = SettingsManager()
     
     init() {
-        getNews()
         observeCategory()
     }
     

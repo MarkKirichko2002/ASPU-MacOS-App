@@ -21,7 +21,9 @@ struct BuildingsMapView: View {
         }
         .navigationTitle("Карты")
         .onAppear {
-            viewModel.getLocation()
+            if viewModel.isLoading {
+                viewModel.getLocation()
+            }
         }
         .mapStyle(viewModel.style(item: viewModel.currentMapStyle))
         .toolbar {

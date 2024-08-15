@@ -27,6 +27,11 @@ struct NewsListView: View {
             }
         }
         .navigationTitle("Новости")
+        .onAppear {
+            if viewModel.isLoading {
+                viewModel.getNews()
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {

@@ -65,7 +65,7 @@ struct AppNavigationView: View {
             case .news:
                 NewsListView()
             case .timetable:
-                EmptyView()
+                TimetableDayListView()
             case .maps:
                 BuildingsMapView()
             }

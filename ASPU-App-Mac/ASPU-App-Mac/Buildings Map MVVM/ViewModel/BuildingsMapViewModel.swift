@@ -22,8 +22,7 @@ final class BuildingsMapViewModel: ObservableObject {
     @Published var currentMapStyle = MapStyles.standard
     @Published var camera: MapCameraPosition = .automatic
     @Published var buildings = Buildings.pins
-    @Published var isPresented = false
-    @Published var isPresentedOptions = false
+    @Published var isLoading = true
     
     // MARK: - сервисы
     private let locationManager = LocationManager()
@@ -39,6 +38,7 @@ final class BuildingsMapViewModel: ObservableObject {
                 self.locationManager.registerLocationHandler { location in
                     DispatchQueue.main.async {
                         self.camera = .region(MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 200, longitudinalMeters: 200))
+                        self.isLoading = false
                         if !self.buildings.contains(where: { $0.name == "Вы" }) {
                             self.buildings.append(BuildingModel(id: 10, name: "Вы", image: [], type: .all, audiences: nil, pin: [location.coordinate.latitude, location.coordinate.longitude]))
                             self.currentLocation = self.buildings.last!
