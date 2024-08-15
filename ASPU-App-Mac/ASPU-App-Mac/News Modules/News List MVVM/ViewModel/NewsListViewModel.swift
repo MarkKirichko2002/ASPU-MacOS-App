@@ -149,6 +149,10 @@ final class NewsListViewModel: ObservableObject {
         }
     }
     
+    func makeUrlForArticle(index: Int)-> String {
+        return newsService.urlForCurrentArticle(abbreviation: abbreviation, index: index)
+    }
+    
     func observeCategory() {
         NotificationCenter.default.addObserver(forName: Notification.Name("category"), object: nil, queue: nil) { _ in
             self.getNews()

@@ -21,7 +21,7 @@ struct NewsListView: View {
                     .fontWeight(.bold)
             } else {
                 List(viewModel.SearchNews()) { article in
-                    ArticleCell(article: article)
+                    ArticleCell(article: article, url: viewModel.makeUrlForArticle(index: article.id))
                     .padding(10)
                 }
             }

@@ -16,6 +16,7 @@
 		82B670F02C6DA5C6002F9F8A /* TimetableDayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670EF2C6DA5C6002F9F8A /* TimetableDayListViewModel.swift */; };
 		82B670F32C6DA609002F9F8A /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670F22C6DA609002F9F8A /* DateManager.swift */; };
 		82B670F52C6DA62E002F9F8A /* TimetableDayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670F42C6DA62E002F9F8A /* TimetableDayListView.swift */; };
+		82B671032C6EA517002F9F8A /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B671022C6EA517002F9F8A /* WebView.swift */; };
 		82FFE13F2C6C17A800103B06 /* ASPU_App_MacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */; };
 		82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE1402C6C17A800103B06 /* ContentView.swift */; };
 		82FFE1432C6C17AC00103B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82FFE1422C6C17AC00103B06 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		82B670EF2C6DA5C6002F9F8A /* TimetableDayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayListViewModel.swift; sourceTree = "<group>"; };
 		82B670F22C6DA609002F9F8A /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		82B670F42C6DA62E002F9F8A /* TimetableDayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayListView.swift; sourceTree = "<group>"; };
+		82B671022C6EA517002F9F8A /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		82FFE13B2C6C17A800103B06 /* ASPU-App-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ASPU-App-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82FFE13E2C6C17A800103B06 /* ASPU_App_MacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPU_App_MacApp.swift; sourceTree = "<group>"; };
 		82FFE1402C6C17A800103B06 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,23 @@
 			path = Date;
 			sourceTree = "<group>";
 		};
+		82B670F62C6E9311002F9F8A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				82B671012C6EA4F6002F9F8A /* Web */,
+				82B670E52C6D92C5002F9F8A /* Navigation */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		82B671012C6EA4F6002F9F8A /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				82B671022C6EA517002F9F8A /* WebView.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		82FFE1322C6C17A700103B06 = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +218,7 @@
 		82FFE13D2C6C17A800103B06 /* ASPU-App-Mac */ = {
 			isa = PBXGroup;
 			children = (
-				82B670E52C6D92C5002F9F8A /* Navigation */,
+				82B670F62C6E9311002F9F8A /* Views */,
 				82FFE14D2C6C1A3E00103B06 /* Services */,
 				82FFE16B2C6C1C9000103B06 /* Models */,
 				82FFE1652C6C1C2700103B06 /* News Modules */,
@@ -448,6 +467,7 @@
 				82B670E82C6D92DF002F9F8A /* AppNavigationView.swift in Sources */,
 				82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */,
 				82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */,
+				82B671032C6EA517002F9F8A /* WebView.swift in Sources */,
 				82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */,
 				82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */,
 				82B670F02C6DA5C6002F9F8A /* TimetableDayListViewModel.swift in Sources */,
