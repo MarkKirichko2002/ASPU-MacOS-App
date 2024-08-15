@@ -11,7 +11,7 @@ import SwiftUI
 struct ASPU_App_MacApp: App {
     var body: some Scene {
         WindowGroup {
-            NewsListView()
+            AppNavigationView()
         }
     }
 }

@@ -57,6 +57,24 @@ final class ASPUNewsService {
         }
     }
     
+    // получить URL для конкретной статьи
+    func urlForCurrentArticle(abbreviation: String, index: Int)-> String {
+        
+        var newsURL = ""
+        
+        if abbreviation == "-"  {
+            newsURL = "http://agpu.net/news.php?ELEMENT_ID=\(index)"
+        } else if abbreviation == "educationaltechnopark" {
+            newsURL = "http://www.agpu.net/struktura-vuza/educationaltechnopark/news/news.php?ELEMENT_ID=\(index)"
+        } else if abbreviation == "PedagogicalQuantorium"  {
+            newsURL = "http://www.agpu.net/struktura-vuza/PedagogicalQuantorium/news/news.php?ELEMENT_ID=\(index)"
+        } else {
+            newsURL = "http://agpu.net/struktura-vuza/faculties/\(abbreviation)/news/news.php?ELEMENT_ID=\(index)"
+        }
+        
+        return newsURL
+    }
+    
     // получить URL для пагинации
     func urlForPagination(abbreviation: String, page: Int)-> String {
         var url = ""

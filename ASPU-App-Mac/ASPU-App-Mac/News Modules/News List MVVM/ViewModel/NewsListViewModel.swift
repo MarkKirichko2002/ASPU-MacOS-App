@@ -23,7 +23,6 @@ final class NewsListViewModel: ObservableObject {
     private let settingsManager = SettingsManager()
     
     init() {
-        getNews()
         observeCategory()
     }
     
@@ -145,8 +144,13 @@ final class NewsListViewModel: ObservableObject {
             return newsResponse.articles ?? []
         } else {
             guard let news = newsResponse.articles else {return []}
-            return news.filter { $0.title!.localizedCaseInsensitiveContains(searchText) }
+            let filteredNews = news.filter { $0.title!.localizedCaseInsensitiveContains(searchText) }
+            return filteredNews
         }
+    }
+    
+    func makeUrlForArticle(index: Int)-> String {
+        return newsService.urlForCurrentArticle(abbreviation: abbreviation, index: index)
     }
     
     func observeCategory() {

@@ -16,17 +16,22 @@ struct NewsListView: View {
         VStack {
             if viewModel.isLoading {
                 ProgressView()
-            } else if viewModel.newsResponse.articles?.isEmpty ?? false {
+            } else if viewModel.SearchNews().isEmpty {
                 Text("Новостей нет")
                     .fontWeight(.bold)
             } else {
                 List(viewModel.SearchNews()) { article in
-                    ArticleCell(article: article)
+                    ArticleCell(article: article, url: viewModel.makeUrlForArticle(index: article.id))
                     .padding(10)
                 }
             }
         }
         .navigationTitle("Новости")
+        .onAppear {
+            if viewModel.isLoading {
+                viewModel.getNews()
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
@@ -51,7 +56,7 @@ struct NewsListView: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText)
+        .searchable(text: $viewModel.searchText, prompt: "Введите текст...")
     }
 }
 

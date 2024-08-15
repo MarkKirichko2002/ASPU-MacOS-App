@@ -11,21 +11,26 @@ import SDWebImageSwiftUI
 struct ArticleCell: View {
     
     var article: Article
+    var url: String
     
     var body: some View {
-        HStack(spacing: 15) {
-            WebImage(url: URL(string: article.previewImage ?? "")!)
-                .resizable()
-                .frame(width: 150, height: 150)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            VStack(alignment: .leading, spacing: 30) {
-                Text(article.title ?? "Нет заголовка")
-                Text(article.date ?? "Нет даты")
+        NavigationLink {
+            WebView(url: url)
+        } label: {
+            HStack(spacing: 15) {
+                WebImage(url: URL(string: article.previewImage ?? "")!)
+                    .resizable()
+                    .frame(width: 150, height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                VStack(alignment: .leading, spacing: 30) {
+                    Text(article.title ?? "Нет заголовка")
+                    Text(article.date ?? "Нет даты")
+                }
             }
         }
     }
 }
 
 #Preview {
-    ArticleCell(article: Article(id: 0, title: "", description: "", date: "", previewImage: ""))
+    ArticleCell(article: Article(id: 0, title: "", description: "", date: "", previewImage: ""), url: "")
 }
