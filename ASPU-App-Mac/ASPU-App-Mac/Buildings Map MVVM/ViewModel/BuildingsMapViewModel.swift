@@ -8,10 +8,18 @@
 import MapKit
 import SwiftUI
 
+enum MapStyles: CaseIterable, Hashable {
+    case standard
+    case image
+    case hybrid
+}
+
 final class BuildingsMapViewModel: ObservableObject {
     
     @Published var selected: Int?
     @Published var currentLocation = Buildings.pins[0]
+    @Published var mapStyles = MapStyles.allCases
+    @Published var currentMapStyle = MapStyles.standard
     @Published var camera: MapCameraPosition = .automatic
     @Published var buildings = Buildings.pins
     @Published var isPresented = false
@@ -23,6 +31,8 @@ final class BuildingsMapViewModel: ObservableObject {
     func indexOfBuilding(building: BuildingModel)-> Int {
         return buildings.firstIndex { $0.name == building.name} ?? 0
     }
+    
+    MapStyle.
     
     func getLocation() {
         locationManager.checkLocationAuthorization { isAuth in
@@ -46,5 +56,33 @@ final class BuildingsMapViewModel: ObservableObject {
             self.currentLocation = building
             self.camera = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: building.pin[0], longitude: building.pin[1]), latitudinalMeters: 200, longitudinalMeters: 200))
         }
+    }
+    
+    func name(for style: MapStyles)-> String {
+        switch style {
+        case .standard:
+            return "Стандартный"
+        case .image:
+            return "Спутниковый"
+        case .hybrid:
+            return "Гибридный"
+        default:
+            break
+        }
+        return "Стандарт"
+    }
+    
+    func style(item: MapStyles)-> MapStyle {
+        switch item {
+        case .standard:
+            return .standard
+        case .image:
+            return .imagery
+        case .hybrid:
+            return .hybrid
+        default:
+            break
+        }
+        return .standard
     }
 }

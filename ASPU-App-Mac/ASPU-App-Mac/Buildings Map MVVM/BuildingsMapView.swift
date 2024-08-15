@@ -23,12 +23,18 @@ struct BuildingsMapView: View {
         .onAppear {
             viewModel.getLocation()
         }
+        .mapStyle(viewModel.style(item: viewModel.currentMapStyle))
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
                     Picker("", selection: $viewModel.currentLocation) {
                         ForEach(viewModel.buildings, id: \.self) { location in
                             Text(location.name)
+                        }
+                    }
+                    Picker("", selection: $viewModel.currentMapStyle) {
+                        ForEach(viewModel.mapStyles, id: \.self) { style in
+                            Text(viewModel.name(for: style))
                         }
                     }
                 }
