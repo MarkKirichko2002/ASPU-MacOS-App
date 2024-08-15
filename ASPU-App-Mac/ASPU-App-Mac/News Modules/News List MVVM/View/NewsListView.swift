@@ -16,7 +16,7 @@ struct NewsListView: View {
         VStack {
             if viewModel.isLoading {
                 ProgressView()
-            } else if viewModel.newsResponse.articles?.isEmpty ?? false {
+            } else if viewModel.SearchNews().isEmpty {
                 Text("Новостей нет")
                     .fontWeight(.bold)
             } else {
@@ -51,7 +51,7 @@ struct NewsListView: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText)
+        .searchable(text: $viewModel.searchText, prompt: "Введите текст...")
     }
 }
 

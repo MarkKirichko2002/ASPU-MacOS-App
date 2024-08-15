@@ -32,8 +32,6 @@ final class BuildingsMapViewModel: ObservableObject {
         return buildings.firstIndex { $0.name == building.name} ?? 0
     }
     
-    MapStyle.
-    
     func getLocation() {
         locationManager.checkLocationAuthorization { isAuth in
             if isAuth {
