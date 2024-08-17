@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum FilterType: String, CaseIterable {
+    case all = "Все"
+    case today = "Сегодня"
+    case yesterday = "Вчера"
+}
+
 final class NewsListViewModel: ObservableObject {
     
     @Published var newsResponse = NewsResponse(currentPage: 0, countPages: 0, articles: [])
@@ -14,12 +20,26 @@ final class NewsListViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var currentCategory = NewsCategories.categories[0]
     @Published var currentPage = 1
-    @Published var searchText = ""
+    @Published var searchText: String = "" {
+        didSet {
+            if searchText.isEmpty {
+                newsResponse.articles = allNews
+            } else {
+                newsResponse.articles = SearchNews()
+            }
+            return newsResponse.articles = SearchNews()
+        }
+    }
+    @Published var currentType = FilterType.all
+    
+    var allNews = [Article]()
+    var types = FilterType.allCases
     
     var abbreviation = "-"
     
     // MARK: - сервисы
     private let newsService = ASPUNewsService()
+    private let dateManager = DateManager()
     private let settingsManager = SettingsManager()
     
     init() {
@@ -41,6 +61,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -57,6 +78,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -81,6 +103,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -97,6 +120,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -118,6 +142,7 @@ final class NewsListViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.newsResponse = data
+                    self.allNews = data.articles ?? []
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -141,16 +166,38 @@ final class NewsListViewModel: ObservableObject {
     
     func SearchNews()-> [Article] {
         if searchText.isEmpty {
-            return newsResponse.articles ?? []
+            allNews = newsResponse.articles ?? []
+            return allNews
         } else {
-            guard let news = newsResponse.articles else {return []}
-            let filteredNews = news.filter { $0.title!.localizedCaseInsensitiveContains(searchText) }
+            let filteredNews = allNews.filter { $0.title!.lowercased().contains(searchText) }
+            DispatchQueue.main.async {
+                self.currentType = .all
+            }
             return filteredNews
         }
     }
     
     func makeUrlForArticle(index: Int)-> String {
         return newsService.urlForCurrentArticle(abbreviation: abbreviation, index: index)
+    }
+    
+    func filterNews(type: FilterType)-> [Article] {
+        switch type {
+        case .all:
+            return allNews
+        case .today:
+            return allNews.filter({ $0.date == dateManager.getCurrentDate()})
+        case .yesterday:
+            let today = dateManager.getCurrentDate()
+            let yesterday = dateManager.previousDay(date: today)
+            return allNews.filter({ $0.date == yesterday})
+        }
+    }
+    
+    func filter(type: FilterType) {
+        DispatchQueue.main.async {
+            self.newsResponse.articles = self.filterNews(type: type)
+        }
     }
     
     func observeCategory() {

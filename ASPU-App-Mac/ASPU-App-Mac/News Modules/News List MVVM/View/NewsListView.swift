@@ -16,13 +16,13 @@ struct NewsListView: View {
         VStack {
             if viewModel.isLoading {
                 ProgressView()
-            } else if viewModel.SearchNews().isEmpty {
+            } else if (viewModel.newsResponse.articles ?? []).isEmpty {
                 Text("Новостей нет")
                     .fontWeight(.bold)
             } else {
-                List(viewModel.SearchNews()) { article in
+                List(viewModel.newsResponse.articles ?? []) { article in
                     ArticleCell(article: article, url: viewModel.makeUrlForArticle(index: article.id))
-                    .padding(10)
+                        .padding(10)
                 }
             }
         }
@@ -35,23 +35,35 @@ struct NewsListView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
-                    // категории новостей
-                    Picker("", selection: $viewModel.currentCategory) {
-                        ForEach(NewsCategories.categories, id: \.self) { category in
-                            Text(category.name)
+                    Menu {
+                        // категории новостей
+                        Picker("Категории", selection: $viewModel.currentCategory) {
+                            ForEach(NewsCategories.categories, id: \.self) { category in
+                                Text(category.name)
+                            }
                         }
-                    }
-                    .onChange(of: viewModel.currentCategory) { category in
-                        viewModel.getNews(abbreviation: category.abbreviation)
-                    }
-                    
-                    Picker("", selection: $viewModel.currentPage) {
-                        ForEach(viewModel.pagesList(), id: \.self) { page in
-                            Text("Страница: \(page)")
+                        .onChange(of: viewModel.currentCategory) { category in
+                            viewModel.getNews(abbreviation: category.abbreviation)
                         }
-                    }
-                    .onChange(of: viewModel.currentPage) { page in
-                        viewModel.getNews(page: page)
+                        Picker("Страницы", selection: $viewModel.currentPage) {
+                            ForEach(viewModel.pagesList(), id: \.self) { page in
+                                Text("Страница: \(page)")
+                            }
+                        }
+                        .onChange(of: viewModel.currentPage) { page in
+                            viewModel.getNews(page: page)
+                        }
+                        
+                        Picker("Фильтрация", selection: $viewModel.currentType) {
+                            ForEach(viewModel.types, id: \.self) { type in
+                                Text(type.rawValue)
+                            }
+                        }
+                        .onChange(of: viewModel.currentType) { type in
+                            viewModel.filter(type: type)
+                        }
+                    } label: {
+                        Image("sections")
                     }
                 }
             }
