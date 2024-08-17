@@ -195,7 +195,9 @@ final class NewsListViewModel: ObservableObject {
     }
     
     func filter(type: FilterType) {
+        print(type)
         DispatchQueue.main.async {
+            self.currentType = type
             self.newsResponse.articles = self.filterNews(type: type)
         }
     }

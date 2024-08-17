@@ -34,37 +34,34 @@ struct NewsListView: View {
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                HStack {
-                    Menu {
-                        // категории новостей
-                        Picker("Категории", selection: $viewModel.currentCategory) {
-                            ForEach(NewsCategories.categories, id: \.self) { category in
-                                Text(category.name)
-                            }
+                Menu {
+                    Picker("Категории", selection: $viewModel.currentCategory) {
+                        ForEach(NewsCategories.categories, id: \.self) { category in
+                            Text(category.name)
                         }
                         .onChange(of: viewModel.currentCategory) { category in
                             viewModel.getNews(abbreviation: category.abbreviation)
                         }
-                        Picker("Страницы", selection: $viewModel.currentPage) {
-                            ForEach(viewModel.pagesList(), id: \.self) { page in
-                                Text("Страница: \(page)")
-                            }
+                    }
+                    Picker("Страницы", selection: $viewModel.currentPage) {
+                        ForEach(viewModel.pagesList(), id: \.self) { page in
+                            Text("Страница: \(page)")
                         }
                         .onChange(of: viewModel.currentPage) { page in
                             viewModel.getNews(page: page)
                         }
-                        
-                        Picker("Фильтрация", selection: $viewModel.currentType) {
-                            ForEach(viewModel.types, id: \.self) { type in
-                                Text(type.rawValue)
-                            }
+                    }
+                    
+                    Picker("Фильтрация", selection: $viewModel.currentType) {
+                        ForEach(viewModel.types, id: \.self) { type in
+                            Text(type.rawValue)
                         }
                         .onChange(of: viewModel.currentType) { type in
                             viewModel.filter(type: type)
                         }
-                    } label: {
-                        Image("sections")
                     }
+                } label: {
+                    Image("sections")
                 }
             }
         }
