@@ -11,6 +11,7 @@ struct TimetableDayListView: View {
     
     @ObservedObject var viewModel = TimetableDayListViewModel()
     @Environment(\.openWindow) var openWindow
+    @State var isPresented = false
     
     var body: some View {
         VStack {
@@ -25,32 +26,48 @@ struct TimetableDayListView: View {
                         .onTapGesture {
                             viewModel.currentDiscipline = pair
                             viewModel.isSelected.toggle()
-                      }
+                        }
                 }
             }
         }
         .navigationTitle("Расписание \(viewModel.timetable.date ?? "")")
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Menu {
-                        Button {
-                            openWindow(id: "weeks list")
-                        } label: {
-                            Text("Недели")
-                        }
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Menu {
+                    Button {
+                        openWindow(id: "weeks list")
                     } label: {
-                        Image("sections")
+                        Text("Недели")
                     }
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Text("Дата")
+                    }
+                } label: {
+                    Image("sections")
                 }
             }
-            .onChange(of: viewModel.date) { oldValue, newValue in
-                viewModel.getTimetable(for: newValue)
-            }
-            .onAppear {
+        }
+        .onChange(of: viewModel.date) { oldValue, newValue in
+            viewModel.getTimetable(for: newValue)
+        }
+        .sheet(isPresented: $viewModel.isSelected) {
+            PairInfoView(viewModel: PairInfoViewModel(pair: viewModel.currentDiscipline, date: viewModel.getCurrentDate()))
+        }
+        .sheet(isPresented: $isPresented) {
+            DatePicker(selection: $viewModel.date) {
+                Text("")
+            }.frame(width: 200, height: 200, alignment: .center)
+                .onChange(of: viewModel.date) {
+                    self.isPresented.toggle()
+                }
+        }
+        .onAppear {
             if viewModel.isLoading {
-               viewModel.getTimetable()
+                viewModel.getTimetable()
             }
-         }
+        }
     }
 }
 

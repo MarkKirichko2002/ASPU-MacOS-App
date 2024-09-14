@@ -13,10 +13,6 @@ struct ASPU_App_MacApp: App {
         WindowGroup {
             AppNavigationView()
         }
-        Window("Информация о паре", id: "pair info") {
-            Text("New in this version…")
-        }
-        
         Window("", id: "weeks list") {
            WeeksListView()
         }
