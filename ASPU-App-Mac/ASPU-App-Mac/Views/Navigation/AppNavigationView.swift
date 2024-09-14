@@ -47,7 +47,6 @@ struct AppNavigationView: View {
                         Text(item.rawValue)
                             .fontWeight(.bold)
                     }.padding(10)
-                    .foregroundStyle(Color("aspu"))
                     .onTapGesture {
                         selectedAppSection = item
                         UserDefaults.saveData(object: item, key: "section") {}

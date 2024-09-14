@@ -10,7 +10,7 @@ import SwiftUI
 struct TimetableDayListView: View {
     
     @ObservedObject var viewModel = TimetableDayListViewModel()
-    @State var date = Date()
+    @Environment(\.openWindow) var openWindow
     
     var body: some View {
         VStack {
@@ -25,20 +25,25 @@ struct TimetableDayListView: View {
                         .onTapGesture {
                             viewModel.currentDiscipline = pair
                             viewModel.isSelected.toggle()
-                        }
+                      }
                 }
             }
-        }.navigationTitle("Расписание \(viewModel.timetable.date ?? "")")
+        }
+        .navigationTitle("Расписание \(viewModel.timetable.date ?? "")")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    HStack {
-                        // категории новостей
-                        DatePicker("Дата", selection: $date)
-                            .pickerStyle(.segmented)
+                    Menu {
+                        Button {
+                            openWindow(id: "weeks list")
+                        } label: {
+                            Text("Недели")
+                        }
+                    } label: {
+                        Image("sections")
                     }
                 }
             }
-            .onChange(of: date) { oldValue, newValue in
+            .onChange(of: viewModel.date) { oldValue, newValue in
                 viewModel.getTimetable(for: newValue)
             }
             .onAppear {
