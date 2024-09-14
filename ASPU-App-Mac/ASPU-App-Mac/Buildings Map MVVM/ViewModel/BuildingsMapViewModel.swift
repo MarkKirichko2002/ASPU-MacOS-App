@@ -40,8 +40,12 @@ final class BuildingsMapViewModel: ObservableObject {
                         self.camera = .region(MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 200, longitudinalMeters: 200))
                         self.isLoading = false
                         if !self.buildings.contains(where: { $0.name == "Вы" }) {
-                            self.buildings.append(BuildingModel(id: 10, name: "Вы", image: [], type: .all, audiences: nil, pin: [location.coordinate.latitude, location.coordinate.longitude]))
-                            self.currentLocation = self.buildings.last!
+                            self.buildings = []
+                            self.buildings.append(BuildingModel(id: 0, name: "Вы", image: [], type: .all, audiences: nil, pin: [location.coordinate.latitude, location.coordinate.longitude]))
+                            for i in Buildings.pins {
+                                self.buildings.append(i)
+                            }
+                            self.currentLocation = self.buildings.first!
                         }
                     }
                 }
@@ -64,10 +68,7 @@ final class BuildingsMapViewModel: ObservableObject {
             return "Спутниковый"
         case .hybrid:
             return "Гибридный"
-        default:
-            break
         }
-        return "Стандарт"
     }
     
     func style(item: MapStyles)-> MapStyle {
@@ -78,9 +79,6 @@ final class BuildingsMapViewModel: ObservableObject {
             return .imagery
         case .hybrid:
             return .hybrid
-        default:
-            break
         }
-        return .standard
     }
 }
