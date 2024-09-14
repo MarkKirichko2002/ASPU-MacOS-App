@@ -8,5 +8,5 @@
 import Foundation
 
 struct HostName {
-    static let host = "81.30.105.104"
+    static let host = "121.127.37.37"
 }

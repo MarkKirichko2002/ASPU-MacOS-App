@@ -28,7 +28,7 @@ struct TimetableDayListView: View {
                         }
                 }
             }
-        }.navigationTitle("Расписание \(viewModel.getCurrentDate())")
+        }.navigationTitle("Расписание \(viewModel.timetable.date ?? "")")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     HStack {

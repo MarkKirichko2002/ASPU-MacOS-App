@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8265587A2C9581B100E52D0D /* UserDefaults + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826558792C9581B100E52D0D /* UserDefaults + Extensions.swift */; };
 		82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E3E2C6CDC9200E6598E /* Buildings.swift */; };
 		82925E412C6CDCCD00E6598E /* BuildingsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E402C6CDCCD00E6598E /* BuildingsMapView.swift */; };
 		82925E432C6CDD2F00E6598E /* BuildingsMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82925E422C6CDD2F00E6598E /* BuildingsMapViewModel.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		826558792C9581B100E52D0D /* UserDefaults + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults + Extensions.swift"; sourceTree = "<group>"; };
 		82925E3E2C6CDC9200E6598E /* Buildings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildings.swift; sourceTree = "<group>"; };
 		82925E402C6CDCCD00E6598E /* BuildingsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsMapView.swift; sourceTree = "<group>"; };
 		82925E422C6CDD2F00E6598E /* BuildingsMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsMapViewModel.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		826558782C95819E00E52D0D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				826558792C9581B100E52D0D /* UserDefaults + Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		82925E3A2C6CDC3D00E6598E /* Buildings Map MVVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +228,7 @@
 		82FFE13D2C6C17A800103B06 /* ASPU-App-Mac */ = {
 			isa = PBXGroup;
 			children = (
+				826558782C95819E00E52D0D /* Extensions */,
 				82B670F62C6E9311002F9F8A /* Views */,
 				82FFE14D2C6C1A3E00103B06 /* Services */,
 				82FFE16B2C6C1C9000103B06 /* Models */,
@@ -468,6 +479,7 @@
 				82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */,
 				82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */,
 				82B671032C6EA517002F9F8A /* WebView.swift in Sources */,
+				8265587A2C9581B100E52D0D /* UserDefaults + Extensions.swift in Sources */,
 				82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */,
 				82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */,
 				82B670F02C6DA5C6002F9F8A /* TimetableDayListViewModel.swift in Sources */,

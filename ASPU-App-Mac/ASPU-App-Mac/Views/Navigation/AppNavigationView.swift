@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum appSections: String, Identifiable, CaseIterable {
+enum appSections: String, Codable, Identifiable, CaseIterable {
     
     var id: String { rawValue }
     
@@ -30,8 +30,12 @@ enum appSections: String, Identifiable, CaseIterable {
 struct AppNavigationView: View {
     
     @State var sideBarVisibility: NavigationSplitViewVisibility = .doubleColumn
-    @State var selectedAppSection: appSections = .news
+    @State var selectedAppSection = UserDefaults.loadData(type: appSections.self, key: "section") ?? appSections.news
     
+    let newsListView = NewsListView()
+    let timetableDayListView = TimetableDayListView()
+    let buildingsMapView = BuildingsMapView()
+
     var body: some View {
         NavigationSplitView(columnVisibility: $sideBarVisibility) {
             List(appSections.allCases, selection: $selectedAppSection) { item in
@@ -46,6 +50,7 @@ struct AppNavigationView: View {
                     .foregroundStyle(Color("aspu"))
                     .onTapGesture {
                         selectedAppSection = item
+                        UserDefaults.saveData(object: item, key: "section") {}
                     }
                 } else {
                     HStack {
@@ -57,17 +62,18 @@ struct AppNavigationView: View {
                     }.padding(10)
                     .onTapGesture {
                         selectedAppSection = item
+                        UserDefaults.saveData(object: item, key: "section") {}
                     }
                 }
             }
         } content: {
             switch selectedAppSection {
             case .news:
-                NewsListView()
+                newsListView
             case .timetable:
-                TimetableDayListView()
+                timetableDayListView
             case .maps:
-                BuildingsMapView()
+                buildingsMapView
             }
         } detail: {}
     }

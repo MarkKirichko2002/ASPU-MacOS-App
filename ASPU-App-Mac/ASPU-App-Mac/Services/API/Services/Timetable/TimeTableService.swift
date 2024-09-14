@@ -14,7 +14,7 @@ final class TimeTableService {
         
         let id = id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
-        AF.request("https://\(HostName.host)/api/v2/timetable/day?id=\(id)&date=\(date)&owner=\(owner)").responseData { response in
+        AF.request("http://\(HostName.host)/api/v2/timetable/day?id=\(id)&date=\(date)&owner=\(owner)").responseData { response in
             
             guard let data = response.data else {return}
             
@@ -32,7 +32,7 @@ final class TimeTableService {
         
         let id = id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         
-        AF.request("https://\(HostName.host)/api/v2/timetable/days?id=\(id)&startDate=\(startDate)&owner=\(owner)&endDate=\(endDate)&removeEmptyDays").responseData { response in
+        AF.request("http://\(HostName.host)/api/v2/timetable/days?id=\(id)&startDate=\(startDate)&owner=\(owner)&endDate=\(endDate)&removeEmptyDays").responseData { response in
             
             guard let data = response.data else {return}
             
@@ -48,7 +48,7 @@ final class TimeTableService {
     
     func getGroups(completion: @escaping(Result<[FacultyModel],Error>)->Void) {
         
-        AF.request("https://\(HostName.host)/api/v2/timetable/groups").responseData { response in
+        AF.request("http://\(HostName.host)/api/v2/timetable/groups").responseData { response in
         
             guard let data = response.data else {return}
             
@@ -64,7 +64,7 @@ final class TimeTableService {
     
     func getWeeks(completion: @escaping(Result<[WeekModel],Error>)->Void) {
         
-        AF.request("https://\(HostName.host)/api/v2/timetable/weeks").responseData { response in
+        AF.request("http://\(HostName.host)/api/v2/timetable/weeks").responseData { response in
             
             guard let data = response.data else {return}
             

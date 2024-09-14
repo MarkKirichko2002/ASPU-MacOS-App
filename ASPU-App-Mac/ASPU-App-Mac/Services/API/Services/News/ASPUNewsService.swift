@@ -13,7 +13,7 @@ final class ASPUNewsService {
     // получить новости
     func getNews(abbreviation: String) async throws -> Result<NewsResponse, Error> {
         
-        let url = URL(string: "https://\(HostName.host)/api/news/\(abbreviation)")!
+        let url = URL(string: "http://\(HostName.host)/api/news/\(abbreviation)")!
         let request = URLRequest(url: url)
         
         let data = try await URLSession.shared.data(for: request)
@@ -29,7 +29,7 @@ final class ASPUNewsService {
     // получить новости АГПУ
     func getASPUNews() async throws -> Result<NewsResponse, Error> {
         
-        let url = URL(string: "https://\(HostName.host)/api/news")!
+        let url = URL(string: "http://\(HostName.host)/api/news")!
         let request = URLRequest(url: url)
         
         let data = try await URLSession.shared.data(for: request)
@@ -79,11 +79,11 @@ final class ASPUNewsService {
     func urlForPagination(abbreviation: String, page: Int)-> String {
         var url = ""
         if abbreviation != "-" {
-            url = "https://\(HostName.host)/api/news/\(abbreviation)?page=\(page)"
+            url = "http://\(HostName.host)/api/news/\(abbreviation)?page=\(page)"
             print(url)
             return url
         } else {
-            url = "https://\(HostName.host)/api/news?page=\(page)"
+            url = "http://\(HostName.host)/api/news?page=\(page)"
             print(url)
             return url
         }
@@ -94,9 +94,9 @@ final class ASPUNewsService {
         var url = ""
         
         if abbreviation != "-" {
-            url = "https://\(HostName.host)/api/news/\(abbreviation)/\(id)"
+            url = "http://\(HostName.host)/api/news/\(abbreviation)/\(id)"
         } else {
-            url = "https://\(HostName.host)/api/news/agpu/\(id)"
+            url = "http://\(HostName.host)/api/news/agpu/\(id)"
         }
         
         let request = URLRequest(url: URL(string: url)!)
