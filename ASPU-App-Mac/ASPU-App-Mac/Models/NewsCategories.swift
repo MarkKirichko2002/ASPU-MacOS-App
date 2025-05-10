@@ -10,7 +10,7 @@ import Foundation
 struct NewsCategories {
     
     static var categories = [
-        NewsCategoryModel(id: 1, name: "АГПУ", abbreviation: "-", isSelected: false),
+        NewsCategoryModel(id: 1, name: "Главное", abbreviation: "-", isSelected: false),
         NewsCategoryModel(id: 2, name: "Технопарк", abbreviation: "educationaltechnopark", isSelected: false),
         NewsCategoryModel(id: 3, name: "Кванториум", abbreviation: "PedagogicalQuantorium", isSelected: false),
         NewsCategoryModel(id: 4, name: "ФилФак", abbreviation: "filfak", isSelected: false),

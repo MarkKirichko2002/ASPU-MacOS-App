@@ -14,20 +14,22 @@ struct ArticleCell: View {
     var url: String
     
     var body: some View {
-        NavigationLink {
-            WebView(url: url)
-        } label: {
-            HStack(spacing: 15) {
+        HStack {
+            NavigationLink {
+                WebView(url: url)
+            } label: {
                 WebImage(url: URL(string: article.previewImage ?? "")!)
                     .resizable()
                     .frame(width: 150, height: 150)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 VStack(alignment: .leading, spacing: 30) {
                     Text(article.title ?? "Нет заголовка")
+                        .fontWeight(.bold)
                     Text(article.date ?? "Нет даты")
+                        .fontWeight(.bold)
                 }
             }
-        }
+        }.padding(15)
     }
 }
 

@@ -17,9 +17,7 @@ struct PairInfoView: View {
                 .fontWeight(.bold)
         }
         .navigationTitle("Информация")
-        .onAppear {
-            viewModel.setUpData()
-        }.onDisappear {
+        .onDisappear {
             viewModel.stopTimer()
         }
     }

@@ -21,6 +21,7 @@ final class PairInfoViewModel: ObservableObject {
     init(pair: Discipline, date: String) {
         self.pair = pair
         self.date = date
+        self.setUpData()
     }
     
     // MARK: - сервисы

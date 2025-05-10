@@ -20,18 +20,12 @@ struct NewsListView: View {
                 Text("Новостей нет")
                     .fontWeight(.bold)
             } else {
-                List(viewModel.newsResponse.articles ?? []) { article in
+                List(viewModel.newsResponse.articles ?? [], id: \.id) { article in
                     ArticleCell(article: article, url: viewModel.makeUrlForArticle(index: article.id))
-                        .padding(10)
                 }
             }
         }
-        .navigationTitle("Новости")
-        .onAppear {
-            if viewModel.isLoading {
-                viewModel.getNews()
-            }
-        }
+        .navigationTitle(viewModel.currentCategory.name)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Menu {
@@ -39,16 +33,16 @@ struct NewsListView: View {
                         ForEach(NewsCategories.categories, id: \.self) { category in
                             Text(category.name)
                         }
-                        .onChange(of: viewModel.currentCategory) { category in
-                            viewModel.getNews(abbreviation: category.abbreviation)
+                        .onChange(of: viewModel.currentCategory) { oldValue, newValue in
+                            viewModel.getNews(abbreviation: newValue.abbreviation)
                         }
                     }
                     Picker("Страницы", selection: $viewModel.currentPage) {
                         ForEach(viewModel.pagesList(), id: \.self) { page in
                             Text("Страница: \(page)")
                         }
-                        .onChange(of: viewModel.currentPage) { page in
-                            viewModel.getNews(page: page)
+                        .onChange(of: viewModel.currentPage) { oldValue, newValue in
+                            viewModel.getNews(page: newValue)
                         }
                     }
                     
@@ -56,13 +50,18 @@ struct NewsListView: View {
                         ForEach(viewModel.types, id: \.self) { type in
                             Text(type.rawValue)
                         }
-                        .onChange(of: viewModel.currentType) { type in
-                            viewModel.filter(type: type)
+                        .onChange(of: viewModel.currentType) { oldValue, newValue in
+                            viewModel.filter(type: newValue)
                         }
                     }
                 } label: {
                     Image("sections")
                 }
+            }
+        }
+        .onAppear {
+            if viewModel.isLoading {
+                viewModel.getNews()
             }
         }
         .searchable(text: $viewModel.searchText, prompt: "Введите текст...")

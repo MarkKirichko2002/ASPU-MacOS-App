@@ -9,12 +9,21 @@ import SwiftUI
 
 @main
 struct ASPU_App_MacApp: App {
+    
+    @StateObject var owner = TimetableOwner()
+    
     var body: some Scene {
         WindowGroup {
             AppNavigationView()
+                .environmentObject(owner)
         }
         Window("", id: "weeks list") {
            WeeksListView()
+        }
+        
+        Window("", id: "search list") {
+            SearchResultsListView()
+                .environmentObject(owner)
         }
     }
 }

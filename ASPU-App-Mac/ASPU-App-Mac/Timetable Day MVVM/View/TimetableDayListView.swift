@@ -11,7 +11,7 @@ struct TimetableDayListView: View {
     
     @ObservedObject var viewModel = TimetableDayListViewModel()
     @Environment(\.openWindow) var openWindow
-    @State var isPresented = false
+    @EnvironmentObject var owner: TimetableOwner
     
     var body: some View {
         VStack {
@@ -22,11 +22,7 @@ struct TimetableDayListView: View {
                     .fontWeight(.bold)
             } else {
                 List(viewModel.timetable.disciplines, id: \.self) { pair in
-                    PairCell(discipline: pair)
-                        .onTapGesture {
-                            viewModel.currentDiscipline = pair
-                            viewModel.isSelected.toggle()
-                        }
+                    PairCell(date: viewModel.timetable.date ?? "", discipline: pair)
                 }
             }
         }
@@ -35,12 +31,12 @@ struct TimetableDayListView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Menu {
                     Button {
-                        openWindow(id: "weeks list")
+                        openWindow(id: "search list")
                     } label: {
-                        Text("Недели")
+                        Text("Поиск")
                     }
                     Button {
-                        isPresented.toggle()
+                        viewModel.isPresented.toggle()
                     } label: {
                         Text("Дата")
                     }
@@ -49,24 +45,29 @@ struct TimetableDayListView: View {
                 }
             }
         }
-        .onChange(of: viewModel.date) { oldValue, newValue in
-            viewModel.getTimetable(for: newValue)
+        .onChange(of: viewModel.isDateSelected) {
+            viewModel.getTimetable(for: viewModel.date)
         }
-        .sheet(isPresented: $viewModel.isSelected) {
-            PairInfoView(viewModel: PairInfoViewModel(pair: viewModel.currentDiscipline, date: viewModel.getCurrentDate()))
+        .onChange(of: owner.result) { oldValue, newValue in
+            viewModel.getTimetable(item: newValue)
         }
-        .sheet(isPresented: $isPresented) {
-            DatePicker(selection: $viewModel.date) {
-                Text("")
-            }.frame(width: 200, height: 200, alignment: .center)
-                .onChange(of: viewModel.date) {
-                    self.isPresented.toggle()
+        .sheet(isPresented: $viewModel.isPresented) {
+            VStack(spacing: 40) {
+                Text("Выберите дату")
+                    .fontWeight(.bold)
+                DatePicker(selection: $viewModel.date) {
+                    Text("")
                 }
-        }
-        .onAppear {
-            if viewModel.isLoading {
-                viewModel.getTimetable()
+                Button(action: {
+                    viewModel.isPresented = false
+                    viewModel.isDateSelected.toggle()
+                }) {
+                    Text("Выбрать")
+                }
+            }.onChange(of: viewModel.date) { oldValue, newValue in
+                print("\(viewModel.dateManager.getFormattedDate(date: newValue))")
             }
+            .frame(width: 400, height: 400, alignment: .center)
         }
     }
 }

@@ -31,39 +31,26 @@ struct AppNavigationView: View {
     
     @State var sideBarVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State var selectedAppSection = UserDefaults.loadData(type: appSections.self, key: "section") ?? appSections.news
+    @EnvironmentObject var owner: TimetableOwner
     
     let newsListView = NewsListView()
     let timetableDayListView = TimetableDayListView()
     let buildingsMapView = BuildingsMapView()
-
+    
     var body: some View {
         NavigationSplitView(columnVisibility: $sideBarVisibility) {
             List(appSections.allCases, selection: $selectedAppSection) { item in
-                if selectedAppSection == item {
-                    HStack {
-                        Image("\(item.icon) selected")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                        Text(item.rawValue)
-                            .fontWeight(.bold)
-                    }.padding(10)
+                HStack {
+                    Image(selectedAppSection == item ? "\(item.icon) selected" : item.icon)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                    Text(item.rawValue)
+                        .fontWeight(.bold)
+                }.padding(10)
                     .onTapGesture {
                         selectedAppSection = item
                         UserDefaults.saveData(object: item, key: "section") {}
                     }
-                } else {
-                    HStack {
-                        Image(item.icon)
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                        Text(item.rawValue)
-                            .fontWeight(.bold)
-                    }.padding(10)
-                    .onTapGesture {
-                        selectedAppSection = item
-                        UserDefaults.saveData(object: item, key: "section") {}
-                    }
-                }
             }
         } content: {
             switch selectedAppSection {
@@ -71,6 +58,7 @@ struct AppNavigationView: View {
                 newsListView
             case .timetable:
                 timetableDayListView
+                    .environmentObject(owner)
             case .maps:
                 buildingsMapView
             }

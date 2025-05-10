@@ -10,6 +10,21 @@ import Foundation
 
 final class TimeTableService {
     
+    func getSearchResults(searchText: String, completion: @escaping(Result<[SearchResultModel],Error>)->Void) {
+        
+        AF.request("https://it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=\(searchText)").responseData { response in
+            
+            guard let data = response.data else {return}
+            
+            do {
+                let results = try JSONDecoder().decode([SearchResultModel].self, from: data)
+                completion(.success(results))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func getTimeTableDay(id: String, date: String, owner: String, completion: @escaping(Result<TimeTable,Error>)->Void) {
         
         let id = id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""

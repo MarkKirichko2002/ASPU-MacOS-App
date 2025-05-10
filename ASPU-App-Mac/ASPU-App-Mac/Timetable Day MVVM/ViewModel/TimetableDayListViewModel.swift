@@ -10,21 +10,42 @@ import Foundation
 final class TimetableDayListViewModel: ObservableObject {
     
     @Published var timetable = TimeTable(id: "", date: "", disciplines: [])
-    @Published var currentDiscipline = Discipline(id: "", time: "", name: "", groupName: "", teacherName: "", audienceID: "", subgroup: 0, type: .all)
     @Published var date = Date()
     @Published var isLoading = true
     @Published var isPresented = false
     @Published var isPresentedInfo = false
-    @Published var isSelected = false
+    @Published var isDateSelected = false
     
     // MARK: - сервисы
     private let service = TimeTableService()
     private let settingsManager = SettingsManager()
-    private let dateManager = DateManager()
+    let dateManager = DateManager()
+    
+    init() {
+        getTimetable()
+    }
     
     func getTimetable() {
         isLoading = true
-        service.getTimeTableDay(id: settingsManager.getSavedID(), date: dateManager.getCurrentDate(), owner: settingsManager.getSavedOwner()) { result in
+        service.getTimeTableDay(id: settingsManager.getSavedID(), date: getCurrentDate(), owner: settingsManager.getSavedOwner()) { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.timetable = data
+                    self.isLoading = false
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                }
+                print(error)
+            }
+        }
+    }
+    
+    func getTimetable(item: SearchResultModel) {
+        isLoading = true
+        service.getTimeTableDay(id: item.searchContent, date: dateManager.getFormattedDate(date: date), owner: item.type.rawValue.getOwner()) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
@@ -63,4 +84,3 @@ final class TimetableDayListViewModel: ObservableObject {
         return dateManager.getCurrentDate()
     }
 }
-

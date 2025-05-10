@@ -10,7 +10,6 @@ import WebKit
 
 struct WebView: NSViewRepresentable {
     
-    @State var isLoading = true
     var url: String
     
     func makeNSView(context: Context)-> NSView {
