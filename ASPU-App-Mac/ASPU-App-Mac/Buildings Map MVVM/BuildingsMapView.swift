@@ -10,7 +10,7 @@ import MapKit
 
 struct BuildingsMapView: View {
     
-    @ObservedObject var viewModel = BuildingsMapViewModel()
+    @StateObject var viewModel: BuildingsMapViewModel
     
     var body: some View {
         Map(position: $viewModel.camera, selection: $viewModel.selected) {
@@ -59,6 +59,6 @@ struct BuildingsMapView: View {
     }
 }
 
-#Preview {
-    BuildingsMapView()
-}
+//#Preview {
+//    BuildingsMapView()
+//}

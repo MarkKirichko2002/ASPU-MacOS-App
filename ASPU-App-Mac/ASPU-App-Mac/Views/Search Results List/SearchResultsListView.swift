@@ -14,6 +14,7 @@ struct SearchResultsListView: View {
     @State var text = ""
     @State var items = [SearchResultModel]()
     @EnvironmentObject var owner: TimetableOwner
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
@@ -30,6 +31,7 @@ struct SearchResultsListView: View {
                         .padding()
                         .onTapGesture {
                             owner.result = item
+                            presentationMode.wrappedValue.dismiss()
                      }
                 }
             }

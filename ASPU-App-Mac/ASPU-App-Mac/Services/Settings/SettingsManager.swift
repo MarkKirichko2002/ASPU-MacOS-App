@@ -18,8 +18,16 @@ final class SettingsManager {
         return savedCategory
     }
     
+    func saveTimetableID(id: String) {
+        UserDefaults.standard.setValue(id, forKey: "id")
+    }
+    
     func getSavedID()-> String {
         return UserDefaults.standard.object(forKey: "id") as? String ?? "ВМ-ИВТ-3-1"
+    }
+    
+    func saveTimetableOwner(owner: String) {
+        UserDefaults.standard.setValue(owner, forKey: "owner")
     }
     
     func getSavedOwner()-> String {

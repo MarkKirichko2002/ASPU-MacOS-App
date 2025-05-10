@@ -21,13 +21,9 @@ final class TimetableDayListViewModel: ObservableObject {
     private let settingsManager = SettingsManager()
     let dateManager = DateManager()
     
-    init() {
-        getTimetable()
-    }
-    
     func getTimetable() {
         isLoading = true
-        service.getTimeTableDay(id: settingsManager.getSavedID(), date: getCurrentDate(), owner: settingsManager.getSavedOwner()) { result in
+        service.getTimeTableDay(id: settingsManager.getSavedID(), date: dateManager.getFormattedDate(date: date), owner: settingsManager.getSavedOwner()) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
@@ -45,6 +41,8 @@ final class TimetableDayListViewModel: ObservableObject {
     
     func getTimetable(item: SearchResultModel) {
         isLoading = true
+        settingsManager.saveTimetableID(id: item.searchContent)
+        settingsManager.saveTimetableOwner(owner: item.type.rawValue.getOwner())
         service.getTimeTableDay(id: item.searchContent, date: dateManager.getFormattedDate(date: date), owner: item.type.rawValue.getOwner()) { result in
             switch result {
             case .success(let data):

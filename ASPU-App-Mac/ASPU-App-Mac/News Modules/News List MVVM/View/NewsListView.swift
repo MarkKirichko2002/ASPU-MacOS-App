@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct NewsListView: View {
     
-    @ObservedObject var viewModel = NewsListViewModel()
+    @StateObject var viewModel: NewsListViewModel
     
     var body: some View {
         VStack {
@@ -68,6 +68,6 @@ struct NewsListView: View {
     }
 }
 
-#Preview {
-    NewsListView()
-}
+//#Preview {
+//    NewsListView()
+//}

@@ -35,7 +35,6 @@ final class TimeTableService {
             
             do {
                 let timetable = try JSONDecoder().decode(TimeTable.self, from: data)
-                print("Расписание: \(timetable)")
                 completion(.success(timetable))
             } catch {
                 completion(.failure(error))
@@ -53,7 +52,6 @@ final class TimeTableService {
             
             do {
                 let timetable = try JSONDecoder().decode([TimeTable].self, from: data)
-                print("Расписание: \(timetable)")
                 completion(.success(timetable))
             } catch {
                 completion(.failure(error))
@@ -69,7 +67,6 @@ final class TimeTableService {
             
             do {
                 let groups = try JSONDecoder().decode([FacultyModel].self, from: data)
-                print("Группы: \(groups)")
                 completion(.success(groups))
             } catch {
                 completion(.failure(error))
@@ -85,7 +82,6 @@ final class TimeTableService {
             
             do {
                 let weeks = try JSONDecoder().decode([WeekModel].self, from: data)
-                print("Недели: \(weeks)")
                 completion(.success(weeks))
             } catch {
                 completion(.failure(error))

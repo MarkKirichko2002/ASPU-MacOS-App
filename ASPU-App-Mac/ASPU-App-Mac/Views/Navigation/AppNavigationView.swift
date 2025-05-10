@@ -31,11 +31,10 @@ struct AppNavigationView: View {
     
     @State var sideBarVisibility: NavigationSplitViewVisibility = .doubleColumn
     @State var selectedAppSection = UserDefaults.loadData(type: appSections.self, key: "section") ?? appSections.news
-    @EnvironmentObject var owner: TimetableOwner
     
-    let newsListView = NewsListView()
-    let timetableDayListView = TimetableDayListView()
-    let buildingsMapView = BuildingsMapView()
+    @StateObject var newsListViewModel = NewsListViewModel()
+    @StateObject var timetableViewModel = TimetableDayListViewModel()
+    @StateObject var buildingsMapViewModel = BuildingsMapViewModel()
     
     var body: some View {
         NavigationSplitView(columnVisibility: $sideBarVisibility) {
@@ -55,12 +54,11 @@ struct AppNavigationView: View {
         } content: {
             switch selectedAppSection {
             case .news:
-                newsListView
+                NewsListView(viewModel: newsListViewModel)
             case .timetable:
-                timetableDayListView
-                    .environmentObject(owner)
+                TimetableDayListView(viewModel: timetableViewModel)
             case .maps:
-                buildingsMapView
+                BuildingsMapView(viewModel: buildingsMapViewModel)
             }
         } detail: {}
     }

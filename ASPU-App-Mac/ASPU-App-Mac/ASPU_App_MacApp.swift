@@ -17,10 +17,6 @@ struct ASPU_App_MacApp: App {
             AppNavigationView()
                 .environmentObject(owner)
         }
-        Window("", id: "weeks list") {
-           WeeksListView()
-        }
-        
         Window("", id: "search list") {
             SearchResultsListView()
                 .environmentObject(owner)

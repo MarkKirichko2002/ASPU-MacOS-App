@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TimetableDayListView: View {
     
-    @ObservedObject var viewModel = TimetableDayListViewModel()
+    @StateObject var viewModel: TimetableDayListViewModel
     @Environment(\.openWindow) var openWindow
     @EnvironmentObject var owner: TimetableOwner
     
@@ -69,9 +69,14 @@ struct TimetableDayListView: View {
             }
             .frame(width: 400, height: 400, alignment: .center)
         }
+        .onAppear {
+            if viewModel.isLoading {
+                viewModel.getTimetable()
+            }
+        }
     }
 }
 
-#Preview {
-    TimetableDayListView()
-}
+//#Preview {
+//    TimetableDayListView()
+//}
