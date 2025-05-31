@@ -19,14 +19,25 @@ struct BuildingsMapView: View {
                 Marker(building.name, coordinate: CLLocationCoordinate2D(latitude: building.pin[0], longitude: building.pin[1])).tag(index)
             }
         }
-        .navigationTitle("Карты")
+        .navigationTitle("")
         .onAppear {
             if viewModel.isLoading {
                 viewModel.getLocation()
             }
         }
-        .mapStyle(viewModel.style(item: viewModel.currentMapStyle))
+        .mapStyle(viewModel.currentMapStyle.style())
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack(alignment: .center) {
+                    Image("map")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 35, height: 35)
+                    Text(viewModel.navigationTitle)
+                        .fontWeight(.black)
+                }
+            }
+            
             ToolbarItem(placement: .confirmationAction) {
                 Menu {
                     Picker("Локации", selection: $viewModel.currentLocation) {
@@ -36,15 +47,19 @@ struct BuildingsMapView: View {
                     }
                     Picker("Стиль карты", selection: $viewModel.currentMapStyle) {
                         ForEach(viewModel.mapStyles, id: \.self) { style in
-                            Text(viewModel.name(for: style))
+                            Text(style.title)
                         }
                     }
                 } label: {
                     Image("sections")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundStyle(Color(.labelColor))
                 }
             }
         }
         .onChange(of: viewModel.currentLocation) { location in
+            viewModel.updateNavigationTitle()
             viewModel.selectLocation(building: location)
         }
         .onChange(of: viewModel.selected) { value in

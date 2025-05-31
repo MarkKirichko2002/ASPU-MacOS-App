@@ -8,10 +8,32 @@
 import MapKit
 import SwiftUI
 
-enum MapStyles: CaseIterable, Hashable {
+enum MapStyles: String, Codable, CaseIterable, Hashable {
     case standard
     case image
     case hybrid
+    
+    var title: String {
+        switch self {
+        case .standard:
+            return "Стандартный"
+        case .image:
+            return "Спутниковый"
+        case .hybrid:
+            return "Гибридный"
+        }
+    }
+    
+    func style() -> MapStyle {
+        switch self {
+        case .standard:
+            return .standard
+        case .image:
+            return .imagery
+        case .hybrid:
+            return .hybrid
+        }
+    }
 }
 
 final class BuildingsMapViewModel: ObservableObject {
@@ -19,13 +41,18 @@ final class BuildingsMapViewModel: ObservableObject {
     @Published var selected: Int?
     @Published var currentLocation = Buildings.pins[0]
     @Published var mapStyles = MapStyles.allCases
-    @Published var currentMapStyle = MapStyles.standard
+    @AppStorage("map style") var currentMapStyle = MapStyles.standard
     @Published var camera: MapCameraPosition = .automatic
     @Published var buildings = Buildings.pins
     @Published var isLoading = true
+    @Published var navigationTitle = "Поиск..."
     
     // MARK: - сервисы
     private let locationManager = LocationManager()
+    
+    init() {
+        observeMapStyleChanges()
+    }
     
     func indexOfBuilding(building: BuildingModel)-> Int {
         return buildings.firstIndex { $0.name == building.name} ?? 0
@@ -60,25 +87,26 @@ final class BuildingsMapViewModel: ObservableObject {
         }
     }
     
-    func name(for style: MapStyles)-> String {
-        switch style {
-        case .standard:
-            return "Стандартный"
-        case .image:
-            return "Спутниковый"
-        case .hybrid:
-            return "Гибридный"
+    func updateNavigationTitle() {
+        if currentLocation.name == "Вы" {
+            DispatchQueue.main.async {
+                self.navigationTitle = "Текущая локация"
+            }
+        } else {
+            if let index = buildings.firstIndex(of: currentLocation) {
+                DispatchQueue.main.async {
+                    self.navigationTitle = "Корпус \(index)/\(self.buildings.count - 1)"
+                }
+            }
         }
     }
     
-    func style(item: MapStyles)-> MapStyle {
-        switch item {
-        case .standard:
-            return .standard
-        case .image:
-            return .imagery
-        case .hybrid:
-            return .hybrid
+    func observeMapStyleChanges() {
+        NotificationCenter.default.addObserver(forName: Notification.Name("map style changed"), object: nil, queue: .main) { notification in
+            print("fkngjkd")
+            if let style = notification.object as? MapStyles {
+                self.currentMapStyle = style
+            }
         }
     }
 }

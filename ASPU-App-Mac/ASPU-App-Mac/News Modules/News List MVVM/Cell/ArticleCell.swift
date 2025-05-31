@@ -25,9 +25,9 @@ struct ArticleCell: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     VStack(alignment: .leading, spacing: 30) {
                         Text(article.title ?? "Нет заголовка")
-                            .fontWeight(.bold)
+                            .fontWeight(.black)
                         Text(article.date ?? "Нет даты")
-                            .fontWeight(.bold)
+                            .fontWeight(.black)
                     }
                 }
             }

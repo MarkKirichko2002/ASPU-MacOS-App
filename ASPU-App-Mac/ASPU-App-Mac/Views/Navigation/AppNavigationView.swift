@@ -14,6 +14,7 @@ enum appSections: String, Codable, Identifiable, CaseIterable {
     case news = "Новости"
     case timetable = "Расписание"
     case maps = "Карты"
+    case settings = "Настройки"
     
     var icon: String {
         switch self {
@@ -23,6 +24,8 @@ enum appSections: String, Codable, Identifiable, CaseIterable {
             return "clock"
         case .maps:
             return "map"
+        case .settings:
+            return "settings"
         }
     }
 }
@@ -42,9 +45,9 @@ struct AppNavigationView: View {
                 HStack {
                     Image(selectedAppSection == item ? "\(item.icon) selected" : item.icon)
                         .resizable()
-                        .frame(width: 30, height: 30)
+                        .frame(width: 32, height: 32)
                     Text(item.rawValue)
-                        .fontWeight(.bold)
+                        .fontWeight(.black)
                 }.padding(10)
                     .onTapGesture {
                         selectedAppSection = item
@@ -59,6 +62,8 @@ struct AppNavigationView: View {
                 TimetableDayListView(viewModel: timetableViewModel)
             case .maps:
                 BuildingsMapView(viewModel: buildingsMapViewModel)
+            case .settings:
+                SettingsListView()
             }
         } detail: {}
     }

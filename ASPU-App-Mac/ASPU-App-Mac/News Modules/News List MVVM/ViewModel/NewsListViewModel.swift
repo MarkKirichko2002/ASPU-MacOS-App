@@ -30,7 +30,10 @@ final class NewsListViewModel: ObservableObject {
             return newsResponse.articles = SearchNews()
         }
     }
+    @Published var date = Date()
     @Published var currentType = FilterType.all
+    @Published var isDateSelected = false
+    @Published var isDatePresented = false
     
     var allNews = [Article]()
     var types = FilterType.allCases
@@ -153,6 +156,76 @@ final class NewsListViewModel: ObservableObject {
         }
     }
     
+    func refreshNews() {
+        self.date = Date()
+        if let page = newsResponse.currentPage {
+            getNews(page: page)
+        }
+    }
+    
+    func filter(type: FilterType) {
+        DispatchQueue.main.async {
+            self.currentType = type
+            self.newsResponse.articles = self.filterNews(type: type)
+        }
+    }
+    
+    func observeCategory() {
+        NotificationCenter.default.addObserver(forName: Notification.Name("category"), object: nil, queue: nil) { _ in
+            self.getNews()
+        }
+    }
+    
+    func searchNews() {
+        
+        let dispatchGroup = DispatchGroup()
+        
+        guard let pages = newsResponse.countPages else {return}
+        
+        var news: Set<Article> = Set()
+        let newsQueue = DispatchQueue(label: "com.yourapp.newsQueue")
+        
+        isLoading = true
+        
+        for page in 1...pages {
+            dispatchGroup.enter()
+            Task {
+                let result = try await newsService.getNews(by: page, abbreviation: abbreviation)
+                defer { dispatchGroup.leave() }
+                switch result {
+                case .success(let data):
+                    guard let articles = data.articles else {return}
+                    newsQueue.sync {
+                        for article in articles {
+                            news.insert(article)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.isLoading = false
+            self.filterNews(by: self.date, arr: Array(news))
+        }
+    }
+    
+    func filterNews(by date: Date, arr: [Article]) {
+        self.date = date
+        let filteredNews = arr.filter({ $0.date == dateManager.getFormattedDate(date: date)})
+        newsResponse.articles = filteredNews
+    }
+    
+    func makeNavigationTitle()-> String {
+        if isLoading {
+            return "Загрузка..."
+        } else {
+            return currentCategory.name
+        }
+    }
+    
     func pagesList()-> [Int] {
         var arr = [1]
         if newsResponse.countPages ?? 0 > 0 {
@@ -191,20 +264,6 @@ final class NewsListViewModel: ObservableObject {
             let today = dateManager.getCurrentDate()
             let yesterday = dateManager.previousDay(date: today)
             return allNews.filter({ $0.date == yesterday})
-        }
-    }
-    
-    func filter(type: FilterType) {
-        print(type)
-        DispatchQueue.main.async {
-            self.currentType = type
-            self.newsResponse.articles = self.filterNews(type: type)
-        }
-    }
-    
-    func observeCategory() {
-        NotificationCenter.default.addObserver(forName: Notification.Name("category"), object: nil, queue: nil) { _ in
-            self.getNews()
         }
     }
 }

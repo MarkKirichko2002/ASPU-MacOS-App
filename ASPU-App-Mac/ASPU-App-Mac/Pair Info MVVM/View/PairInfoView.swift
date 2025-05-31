@@ -14,7 +14,7 @@ struct PairInfoView: View {
     var body: some View {
         List(viewModel.pairInfo, id: \.self) { item in
             Text(item)
-                .fontWeight(.bold)
+                .fontWeight(.black)
         }
         .navigationTitle("Информация")
         .onDisappear {

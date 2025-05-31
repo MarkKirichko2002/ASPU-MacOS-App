@@ -13,24 +13,25 @@ struct SearchResultsListView: View {
     
     @State var text = ""
     @State var items = [SearchResultModel]()
-    @EnvironmentObject var owner: TimetableOwner
+    @EnvironmentObject var storage: TimetableStorage
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
             if items.isEmpty {
                 Text("Нет результатов")
-                    .fontWeight(.bold)
+                    .fontWeight(.black)
             } else {
                 List(items, id: \.searchID) { item in
                     HStack {
                         Text(item.searchContent)
-                            .fontWeight(.bold)
+                            .fontWeight(.black)
                         Spacer()
                     }.contentShape(Rectangle())
                         .padding()
                         .onTapGesture {
-                            owner.result = item
+                            storage.viewModel.id = item.searchContent
+                            storage.viewModel.owner = item.type.rawValue.getOwner()
                             presentationMode.wrappedValue.dismiss()
                      }
                 }
