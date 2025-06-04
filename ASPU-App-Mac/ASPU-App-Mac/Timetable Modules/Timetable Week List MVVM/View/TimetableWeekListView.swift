@@ -24,7 +24,7 @@ struct TimetableWeekListView: View {
             } else {
                 List {
                     ForEach(viewModel.timetable, id: \.self) { day in
-                        Section(header: Text(viewModel.titleForSection(date: day.date ?? "")).font(.system(size: 16))) {
+                        Section(header: Text(viewModel.titleForSection(date: day.date ?? "")).font(.system(size: 16)).fontWeight(.black)) {
                             ForEach(day.disciplines, id: \.self) { discipline in
                                 PairCell(date: day.date ?? "", discipline: discipline)
                             }

@@ -103,7 +103,6 @@ final class BuildingsMapViewModel: ObservableObject {
     
     func observeMapStyleChanges() {
         NotificationCenter.default.addObserver(forName: Notification.Name("map style changed"), object: nil, queue: .main) { notification in
-            print("fkngjkd")
             if let style = notification.object as? MapStyles {
                 self.currentMapStyle = style
             }

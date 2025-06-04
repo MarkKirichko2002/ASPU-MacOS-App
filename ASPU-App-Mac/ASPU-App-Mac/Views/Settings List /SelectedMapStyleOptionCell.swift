@@ -16,20 +16,23 @@ struct SelectedMapStyleOptionCell: View {
     var body: some View {
         HStack(spacing: 15) {
             Map(position: $camera)
-                .frame(width: 100, height: 100)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .modifier(ImageShape())
                 .mapStyle(style.style())
-            Picker("Стиль карты", selection: $style) {
-                ForEach(MapStyles.allCases, id: \.self) { style in
-                    Text(style.title)
+            
+            VStack(alignment: .center, spacing: 30) {
+                Text("Стиль карты")
+                    .fontWeight(.black)
+                Picker("", selection: $style) {
+                    ForEach(MapStyles.allCases, id: \.self) { style in
+                        Text(style.title)
+                    }
+                }.fontWeight(.black)
+                .onChange(of: style) { oldValue, newValue in
+                    NotificationCenter.default.post(name: Notification.Name("map style changed"), object: style)
+                    style = newValue
                 }
-            }.fontWeight(.black)
-            .onChange(of: style) { oldValue, newValue in
-                NotificationCenter.default.post(name: Notification.Name("map style changed"), object: style)
-                style = newValue
             }
         }.padding(30)
-            .border(.primary, width: 3)
     }
 }
 

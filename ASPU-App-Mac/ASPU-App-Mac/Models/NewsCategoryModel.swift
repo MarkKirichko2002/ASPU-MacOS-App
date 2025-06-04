@@ -7,11 +7,10 @@
 
 import Foundation
 
-struct NewsCategoryModel: Identifiable, Hashable {
+struct NewsCategoryModel: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let icon: String
     let abbreviation: String
     var isSelected: Bool
 }
-

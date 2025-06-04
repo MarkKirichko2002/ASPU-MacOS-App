@@ -11,7 +11,8 @@ struct SettingsListView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Основное").font(.system(size: 15))) {
+            Section(header: Text("Внешний вид").font(.system(size: 15)).fontWeight(.black)) {
+                NewsSettingsOptionCell()
                 SelectedMapStyleOptionCell()
             }
         }.navigationTitle("")

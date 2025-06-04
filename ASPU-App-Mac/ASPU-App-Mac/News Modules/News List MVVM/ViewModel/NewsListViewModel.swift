@@ -5,12 +5,13 @@
 //  Created by Марк Киричко on 14.08.2024.
 //
 
-import Foundation
+import SwiftUI
 
 enum FilterType: String, CaseIterable {
     case all = "Все"
     case today = "Сегодня"
     case yesterday = "Вчера"
+    case dayBeforeYesterday = "Позавчера"
 }
 
 final class NewsListViewModel: ObservableObject {
@@ -32,13 +33,12 @@ final class NewsListViewModel: ObservableObject {
     }
     @Published var date = Date()
     @Published var currentType = FilterType.all
+    @AppStorage("news category") var abbreviation = NewsCategories.categories[0].abbreviation
     @Published var isDateSelected = false
     @Published var isDatePresented = false
     
     var allNews = [Article]()
     var types = FilterType.allCases
-    
-    var abbreviation = "-"
     
     // MARK: - сервисы
     private let newsService = ASPUNewsService()
@@ -51,10 +51,7 @@ final class NewsListViewModel: ObservableObject {
     
     func getNews() {
         
-        let abbreviation = settingsManager.getSavedCategory()
         currentCategory = NewsCategories.categories.first(where: { $0.abbreviation == abbreviation})!
-        
-        self.abbreviation = abbreviation
         
         if currentCategory.abbreviation != "-" {
             Task {
@@ -171,8 +168,10 @@ final class NewsListViewModel: ObservableObject {
     }
     
     func observeCategory() {
-        NotificationCenter.default.addObserver(forName: Notification.Name("category"), object: nil, queue: nil) { _ in
-            self.getNews()
+        NotificationCenter.default.addObserver(forName: Notification.Name("news category changed"), object: nil, queue: nil) { notification in
+            if let abbreviation = notification.object as? String {
+                self.getNews(abbreviation: abbreviation)
+            }
         }
     }
     
@@ -264,6 +263,11 @@ final class NewsListViewModel: ObservableObject {
             let today = dateManager.getCurrentDate()
             let yesterday = dateManager.previousDay(date: today)
             return allNews.filter({ $0.date == yesterday})
+        case .dayBeforeYesterday:
+            let today = dateManager.getCurrentDate()
+            let yesterday = dateManager.previousDay(date: today)
+            let dayBeforeYesterday = dateManager.previousDay(date: yesterday)
+            return allNews.filter({ $0.date == dayBeforeYesterday})
         }
     }
 }

@@ -13,6 +13,7 @@ final class WeeksListViewModel: ObservableObject {
     @Published var currentWeek = WeekModel(id: 1, from: "", to: "", dayNames: ["" : ""])
     @Published var isPresented = false
     @Published var isSelected = false
+    @Published var isChartsSelected = false
     @Published var isLoading = false
     
     // MARK: - сервисы

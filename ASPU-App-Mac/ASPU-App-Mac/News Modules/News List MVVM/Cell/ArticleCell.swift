@@ -18,11 +18,10 @@ struct ArticleCell: View {
             NavigationLink {
                 WebView(url: url)
             } label: {
-                HStack(spacing: 15) {
+                HStack(spacing: 20) {
                 WebImage(url: URL(string: article.previewImage ?? "")!)
                     .resizable()
-                    .frame(width: 150, height: 150)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .modifier(ImageShape())
                     VStack(alignment: .leading, spacing: 30) {
                         Text(article.title ?? "Нет заголовка")
                             .fontWeight(.black)

@@ -21,10 +21,22 @@ struct WeeksListView: View {
             } else if !viewModel.weeks.isEmpty {
                 List(viewModel.weeks) { week in
                     WeekCell(week: week)
-                        .onTapGesture {
+                    .onTapGesture {
+                        storage.currentWeek = week
+                        viewModel.isSelected.toggle()
+                    }
+                    .contextMenu {
+                        Button(action: {
                             storage.currentWeek = week
-                            viewModel.isSelected.toggle()
-                     }
+                            viewModel.isChartsSelected.toggle()
+                        }) {
+                            HStack {
+                                Image("charts")
+                                Text("График")
+                                    .fontWeight(.black)
+                            }
+                        }
+                    }
                 }
             } else {
                 Text("Нет недель")
@@ -37,6 +49,9 @@ struct WeeksListView: View {
         }
         .onChange(of: viewModel.isSelected) {
             openWindow(id: "timetable week")
+        }
+        .onChange(of: viewModel.isChartsSelected) {
+            openWindow(id: "timetable week charts")
         }
     }
 }

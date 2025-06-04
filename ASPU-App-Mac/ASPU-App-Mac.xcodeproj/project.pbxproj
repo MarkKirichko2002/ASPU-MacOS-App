@@ -32,6 +32,12 @@
 		829E4F012DDFC9A3009BF901 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 829E4F002DDFC9A3009BF901 /* AppIcon.icns */; };
 		829E532A2CA34DB400BB0696 /* SearchResultsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E53292CA34DB400BB0696 /* SearchResultsListView.swift */; };
 		829E532C2CA34F3400BB0696 /* SearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829E532B2CA34F3200BB0696 /* SearchResultModel.swift */; };
+		82B0DFB62DEC53E5001F2E39 /* NewsSettingsOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFB52DEC53E5001F2E39 /* NewsSettingsOptionCell.swift */; };
+		82B0DFB82DEC57FE001F2E39 /* ImageShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFB72DEC57FE001F2E39 /* ImageShape.swift */; };
+		82B0DFDC2DEC75F8001F2E39 /* TimetableWeekChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFDB2DEC75F8001F2E39 /* TimetableWeekChartsView.swift */; };
+		82B0DFDF2DEC76CF001F2E39 /* TimetableWeekChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFDE2DEC76CF001F2E39 /* TimetableWeekChartsViewModel.swift */; };
+		82B0DFE12DEC7C65001F2E39 /* TimeTable + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFE02DEC7C65001F2E39 /* TimeTable + Extensions.swift */; };
+		82B0DFE42DECADCA001F2E39 /* ChartTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0DFE32DECADCA001F2E39 /* ChartTypes.swift */; };
 		82B670E82C6D92DF002F9F8A /* AppNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670E72C6D92DF002F9F8A /* AppNavigationView.swift */; };
 		82B670EE2C6DA589002F9F8A /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670ED2C6DA589002F9F8A /* PairCell.swift */; };
 		82B670F02C6DA5C6002F9F8A /* TimetableDayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B670EF2C6DA5C6002F9F8A /* TimetableDayListViewModel.swift */; };
@@ -88,6 +94,12 @@
 		829E4F002DDFC9A3009BF901 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		829E53292CA34DB400BB0696 /* SearchResultsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsListView.swift; sourceTree = "<group>"; };
 		829E532B2CA34F3200BB0696 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
+		82B0DFB52DEC53E5001F2E39 /* NewsSettingsOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSettingsOptionCell.swift; sourceTree = "<group>"; };
+		82B0DFB72DEC57FE001F2E39 /* ImageShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageShape.swift; sourceTree = "<group>"; };
+		82B0DFDB2DEC75F8001F2E39 /* TimetableWeekChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableWeekChartsView.swift; sourceTree = "<group>"; };
+		82B0DFDE2DEC76CF001F2E39 /* TimetableWeekChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableWeekChartsViewModel.swift; sourceTree = "<group>"; };
+		82B0DFE02DEC7C65001F2E39 /* TimeTable + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeTable + Extensions.swift"; sourceTree = "<group>"; };
+		82B0DFE32DECADCA001F2E39 /* ChartTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTypes.swift; sourceTree = "<group>"; };
 		82B670E72C6D92DF002F9F8A /* AppNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationView.swift; sourceTree = "<group>"; };
 		82B670ED2C6DA589002F9F8A /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		82B670EF2C6DA5C6002F9F8A /* TimetableDayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableDayListViewModel.swift; sourceTree = "<group>"; };
@@ -137,6 +149,7 @@
 			children = (
 				820A37B32DEB7CE200B4C678 /* SettingsListView.swift */,
 				820A37B52DEB800900B4C678 /* SelectedMapStyleOptionCell.swift */,
+				82B0DFB52DEC53E5001F2E39 /* NewsSettingsOptionCell.swift */,
 			);
 			path = "Settings List ";
 			sourceTree = "<group>";
@@ -173,6 +186,7 @@
 				821141E32DDE61BA008E907F /* Timetable Week List MVVM */,
 				8255EC452DD3C4630073C37E /* Days List MVVM */,
 				8265587B2C9593F400E52D0D /* Weeks List MVVM */,
+				82B0DFD92DEC75CC001F2E39 /* Timetable Week Charts MVVM */,
 			);
 			path = "Timetable Modules";
 			sourceTree = "<group>";
@@ -226,6 +240,7 @@
 			children = (
 				826558792C9581B100E52D0D /* UserDefaults + Extensions.swift */,
 				827285032DCF7567004A91C0 /* String + Extensions.swift */,
+				82B0DFE02DEC7C65001F2E39 /* TimeTable + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -339,6 +354,48 @@
 			path = "Search Results List";
 			sourceTree = "<group>";
 		};
+		82B0DFB92DEC589D001F2E39 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				82B0DFB72DEC57FE001F2E39 /* ImageShape.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		82B0DFD92DEC75CC001F2E39 /* Timetable Week Charts MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				82B0DFE22DECADBE001F2E39 /* Model */,
+				82B0DFDA2DEC75E7001F2E39 /* View */,
+				82B0DFDD2DEC76C3001F2E39 /* ViewModel */,
+			);
+			path = "Timetable Week Charts MVVM";
+			sourceTree = "<group>";
+		};
+		82B0DFDA2DEC75E7001F2E39 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82B0DFDB2DEC75F8001F2E39 /* TimetableWeekChartsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		82B0DFDD2DEC76C3001F2E39 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				82B0DFDE2DEC76CF001F2E39 /* TimetableWeekChartsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		82B0DFE22DECADBE001F2E39 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				82B0DFE32DECADCA001F2E39 /* ChartTypes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		82B670E52C6D92C5002F9F8A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +449,7 @@
 		82B670F62C6E9311002F9F8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				82B0DFB92DEC589D001F2E39 /* Modifiers */,
 				829E53282CA34D9C00BB0696 /* Search Results List */,
 				82B671012C6EA4F6002F9F8A /* Web */,
 				82B670E52C6D92C5002F9F8A /* Navigation */,
@@ -670,9 +728,11 @@
 				82FFE1722C6C1CDF00103B06 /* SettingsManager.swift in Sources */,
 				82925E412C6CDCCD00E6598E /* BuildingsMapView.swift in Sources */,
 				82FFE1412C6C17A800103B06 /* ContentView.swift in Sources */,
+				82B0DFDC2DEC75F8001F2E39 /* TimetableWeekChartsView.swift in Sources */,
 				82FFE1742C6C1D0200103B06 /* NewsListView.swift in Sources */,
 				82FFE1572C6C1B8700103B06 /* NewsResponse.swift in Sources */,
 				82FFE15B2C6C1BB200103B06 /* TimeTable.swift in Sources */,
+				82B0DFB82DEC57FE001F2E39 /* ImageShape.swift in Sources */,
 				826558892C9601D100E52D0D /* PairInfoViewModel .swift in Sources */,
 				8255EC502DD3C4EC0073C37E /* DaysListView.swift in Sources */,
 				8255EC4A2DD3C48C0073C37E /* DayModel.swift in Sources */,
@@ -682,6 +742,7 @@
 				821141E92DDE6214008E907F /* TimetableWeekListView.swift in Sources */,
 				82FFE16F2C6C1CBA00103B06 /* NewsCategories.swift in Sources */,
 				8265587F2C95944700E52D0D /* WeeksListViewModel.swift in Sources */,
+				82B0DFE42DECADCA001F2E39 /* ChartTypes.swift in Sources */,
 				82FFE1532C6C1B1500103B06 /* HostName.swift in Sources */,
 				82B670EE2C6DA589002F9F8A /* PairCell.swift in Sources */,
 				82FFE16A2C6C1C5900103B06 /* NewsListViewModel.swift in Sources */,
@@ -690,6 +751,7 @@
 				82925E432C6CDD2F00E6598E /* BuildingsMapViewModel.swift in Sources */,
 				82B670E82C6D92DF002F9F8A /* AppNavigationView.swift in Sources */,
 				829E532C2CA34F3400BB0696 /* SearchResultModel.swift in Sources */,
+				82B0DFB62DEC53E5001F2E39 /* NewsSettingsOptionCell.swift in Sources */,
 				82FFE1552C6C1B2B00103B06 /* Discipline.swift in Sources */,
 				82FFE1812C6C2EDF00103B06 /* ArticleCell.swift in Sources */,
 				8255EC532DD3C8A00073C37E /* DayCell.swift in Sources */,
@@ -698,6 +760,7 @@
 				82B671032C6EA517002F9F8A /* WebView.swift in Sources */,
 				8265587A2C9581B100E52D0D /* UserDefaults + Extensions.swift in Sources */,
 				82925E3F2C6CDC9200E6598E /* Buildings.swift in Sources */,
+				82B0DFDF2DEC76CF001F2E39 /* TimetableWeekChartsViewModel.swift in Sources */,
 				82FFE16D2C6C1CA800103B06 /* NewsCategoryModel.swift in Sources */,
 				82B670F02C6DA5C6002F9F8A /* TimetableDayListViewModel.swift in Sources */,
 				8255EC552DD3D6930073C37E /* TimetableViewModel.swift in Sources */,
@@ -705,6 +768,7 @@
 				826558812C95947600E52D0D /* WeeksListView.swift in Sources */,
 				820A37B62DEB800900B4C678 /* SelectedMapStyleOptionCell.swift in Sources */,
 				829E532A2CA34DB400BB0696 /* SearchResultsListView.swift in Sources */,
+				82B0DFE12DEC7C65001F2E39 /* TimeTable + Extensions.swift in Sources */,
 				82B670F52C6DA62E002F9F8A /* TimetableDayListView.swift in Sources */,
 				821141E72DDE61FA008E907F /* TimetableWeekListViewModel.swift in Sources */,
 				827285042DCF7567004A91C0 /* String + Extensions.swift in Sources */,
@@ -845,7 +909,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ASPU-App-Mac/ASPU_App_Mac.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"ASPU-App-Mac/Preview Content\"";
 				DEVELOPMENT_TEAM = 265GKHT32M;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -860,7 +924,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ASPU-App-Mac";
 				PRODUCT_NAME = "ФГБОУ ВО «АГПУ»";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -877,7 +941,7 @@
 				CODE_SIGN_ENTITLEMENTS = "ASPU-App-Mac/ASPU_App_Mac.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"ASPU-App-Mac/Preview Content\"";
 				DEVELOPMENT_TEAM = 265GKHT32M;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -892,7 +956,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ASPU-App-Mac";
 				PRODUCT_NAME = "ФГБОУ ВО «АГПУ»";
 				SWIFT_EMIT_LOC_STRINGS = YES;
