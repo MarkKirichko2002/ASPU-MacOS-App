@@ -25,16 +25,28 @@ final class TimeTableService {
         }
     }
     
-    func getTimeTableDay(id: String, date: String, owner: String, completion: @escaping(Result<TimeTable,Error>)->Void) {
-        
-        let id = id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        AF.request("http://\(HostName.host)/api/v2/timetable/day?id=\(id)&date=\(date)&owner=\(owner)").responseData { response in
-            
-            guard let data = response.data else {return}
-            
+    func getTimeTableDay(id: String, date: String, owner: String, completion: @escaping (Result<TimeTable, Error>) -> Void) {
+        Task {
             do {
-                let timetable = try JSONDecoder().decode(TimeTable.self, from: data)
+                guard let timetableOwner = TimetableOwner(rawValue: owner.capitalized) else {
+                    throw NSError(domain: "InvalidOwner", code: 0)
+                }
+                
+                let days = try await GetTimetableService.shared.getDisciplines(
+                    id: id,
+                    owner: timetableOwner,
+                    startDate: date,
+                    endDate: date
+                )
+                
+                guard let day = days.first else {
+                    throw NSError(domain: "NoData", code: 0)
+                }
+                
+                let timetable = TimeTable(id: day.owner?.rawValue ?? "", date: day.date, disciplines: day.lessons.map({ Discipline(time: $0.time ?? "", name: $0.name ?? "", groupName: $0.groupName ?? "", teacherName: $0.teacherName ?? "", audienceID: $0.audienceId ?? "", subgroup: $0.subgroup, type: $0.type)
+                    
+                }))
+                
                 completion(.success(timetable))
             } catch {
                 completion(.failure(error))
@@ -42,18 +54,33 @@ final class TimeTableService {
         }
     }
     
-    func getTimeTableWeek(id: String, startDate: String, endDate: String, owner: String, completion: @escaping(Result<[TimeTable],Error>)->Void) {
+    func getTimeTableWeek(id: String, startDate: String, endDate: String, owner: String, completion: @escaping (Result<[TimeTable], Error>) -> Void) {
+        // Маппинг строки owner в TimetableOwner
+        guard let timetableOwner = TimetableOwner(rawValue: owner.capitalized) else {
+            let error = NSError(domain: "TimetableError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid owner type: \(owner)"])
+            completion(.failure(error))
+            return
+        }
         
-        let id = id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
-        AF.request("http://\(HostName.host)/api/v2/timetable/days?id=\(id)&startDate=\(startDate)&owner=\(owner)&endDate=\(endDate)&removeEmptyDays").responseData { response in
-            
-            guard let data = response.data else {return}
-            
+        // Вызываем getDisciplines из GetTimetableService
+        Task {
             do {
-                let timetable = try JSONDecoder().decode([TimeTable].self, from: data)
-                completion(.success(timetable))
+                let timetableDays = try await GetTimetableService.shared.getDisciplines(
+                    id: id,
+                    owner: timetableOwner,
+                    startDate: startDate,
+                    endDate: endDate
+                )
+                
+                // Преобразуем [TimetableDay] в [TimeTable]
+                var timeTables = timetableDays.map { TimeTable(id: $0.owner?.rawValue ?? "", date: $0.date, disciplines: $0.lessons.map({ Discipline(time: $0.time ?? "", name: $0.name ?? "", groupName: $0.groupName ?? "", teacherName: $0.teacherName ?? "", audienceID: $0.audienceId ?? "", subgroup: $0.subgroup, type: $0.type)
+                    
+                })) }
+                
+                timeTables = timeTables.filter { !$0.disciplines.isEmpty }
+                completion(.success(timeTables))
             } catch {
+                print("Error fetching timetable: \(error)")
                 completion(.failure(error))
             }
         }
@@ -67,6 +94,7 @@ final class TimeTableService {
             
             do {
                 let groups = try JSONDecoder().decode([FacultyModel].self, from: data)
+                print("Группы: \(groups)")
                 completion(.success(groups))
             } catch {
                 completion(.failure(error))
@@ -74,18 +102,7 @@ final class TimeTableService {
         }
     }
     
-    func getWeeks(completion: @escaping(Result<[WeekModel],Error>)->Void) {
-        
-        AF.request("http://\(HostName.host)/api/v2/timetable/weeks").responseData { response in
-            
-            guard let data = response.data else {return}
-            
-            do {
-                let weeks = try JSONDecoder().decode([WeekModel].self, from: data)
-                completion(.success(weeks))
-            } catch {
-                completion(.failure(error))
-            }
-        }
+    func getWeeks(completion: @escaping (Result<[WeekModel], Error>) -> Void) {
+        completion(.success(GetWeeksService.shared.collectWeeks()))
     }
 }

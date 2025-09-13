@@ -8,10 +8,11 @@
 import SwiftUI
 
 enum FilterType: String, CaseIterable {
-    case all = "Все"
     case today = "Сегодня"
     case yesterday = "Вчера"
     case dayBeforeYesterday = "Позавчера"
+    case currentWeek = "Текущая неделя"
+    case all = "Все новости"
 }
 
 final class NewsListViewModel: ObservableObject {
@@ -154,7 +155,10 @@ final class NewsListViewModel: ObservableObject {
     }
     
     func refreshNews() {
-        self.date = Date()
+        DispatchQueue.main.async {
+            self.date = Date()
+            self.currentType = .all
+        }
         if let page = newsResponse.currentPage {
             getNews(page: page)
         }
@@ -255,8 +259,6 @@ final class NewsListViewModel: ObservableObject {
     
     func filterNews(type: FilterType)-> [Article] {
         switch type {
-        case .all:
-            return allNews
         case .today:
             return allNews.filter({ $0.date == dateManager.getCurrentDate()})
         case .yesterday:
@@ -268,6 +270,11 @@ final class NewsListViewModel: ObservableObject {
             let yesterday = dateManager.previousDay(date: today)
             let dayBeforeYesterday = dateManager.previousDay(date: yesterday)
             return allNews.filter({ $0.date == dayBeforeYesterday})
+        case .currentWeek:
+            let dates = dateManager.datesOfCurrentWeek()
+            return allNews.filter { dates.contains($0.date ?? "") }
+        case .all:
+            return allNews
         }
     }
 }

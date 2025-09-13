@@ -92,11 +92,11 @@ struct TimetableDayListView: View {
         .onChange(of: viewModel.isDateSelected) {
             viewModel.getTimetable(for: viewModel.date)
         }
-        .onChange(of: storage.viewModel.owner) { oldValue, newValue in
+        .onChange(of: storage.viewModel.id) { oldValue, newValue in
             viewModel.getTimetable(item: storage.viewModel)
         }
-        .onChange(of: storage.viewModel.date) { date in
-            viewModel.getTimetable(for: date)
+        .onChange(of: storage.viewModel.date) { oldValue, newValue in
+            viewModel.getTimetable(for: newValue)
         }
         .sheet(isPresented: $viewModel.isPresented) {
             VStack(spacing: 40) {

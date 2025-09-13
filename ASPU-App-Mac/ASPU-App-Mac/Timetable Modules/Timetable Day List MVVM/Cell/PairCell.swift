@@ -52,5 +52,5 @@ struct PairCell: View {
 }
 
 #Preview {
-    PairCell(date: "", discipline: Discipline(id: "", time: "", name: "", groupName: "", teacherName: "", audienceID: "", subgroup: 0, type: .all))
+    PairCell(date: "", discipline: Discipline(time: "", name: "", groupName: "", teacherName: "", audienceID: "", subgroup: 0, type: .all))
 }

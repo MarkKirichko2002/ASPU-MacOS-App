@@ -10,17 +10,12 @@ import Foundation
 
 final class ASPUNewsService {
 
-    // получить новости
+    // получить новости по факультету
     func getNews(abbreviation: String) async throws -> Result<NewsResponse, Error> {
-        
-        let url = URL(string: "http://\(HostName.host)/api/news/\(abbreviation)")!
-        let request = URLRequest(url: url)
-        
-        let data = try await URLSession.shared.data(for: request)
-        
+        let parser = NewsParser()
         do {
-            let news = try JSONDecoder().decode(NewsResponse.self, from: data.0)
-            return .success(news)
+            let response = try await parser.getArticlesByFaculty(faculty: abbreviation, page: 1)
+            return .success(response)
         } catch {
             return .failure(error)
         }
@@ -28,30 +23,37 @@ final class ASPUNewsService {
     
     // получить новости АГПУ
     func getASPUNews() async throws -> Result<NewsResponse, Error> {
-        
-        let url = URL(string: "http://\(HostName.host)/api/news")!
-        let request = URLRequest(url: url)
-        
-        let data = try await URLSession.shared.data(for: request)
-        
+        let parser = NewsParser()
         do {
-            let news = try JSONDecoder().decode(NewsResponse.self, from: data.0)
-            return .success(news)
+            let response = try await parser.getAgpuNews(page: 1)
+            return .success(response)
         } catch {
             return .failure(error)
         }
     }
     
+    // получить новости по странице и факультету
     func getNews(by page: Int, abbreviation: String) async throws -> Result<NewsResponse, Error> {
-        
-        let url = URL(string: urlForPagination(abbreviation: abbreviation, page: page))!
-        let request = URLRequest(url: url)
-        
-        let data = try await URLSession.shared.data(for: request)
-        
+        let parser = NewsParser()
         do {
-            let news = try JSONDecoder().decode(NewsResponse.self, from: data.0)
-            return .success(news)
+            let response = try await parser.getArticlesByFaculty(faculty: abbreviation, page: page)
+            return .success(response)
+        } catch {
+            return .failure(error)
+        }
+    }
+    
+    // получить информацию о конкретной статье
+    func getArticleInfo(abbreviation: String, id: Int) async throws -> Result<ArticleInfo, Error> {
+        let parser = NewsParser()
+        do {
+            let article: ArticleInfo
+            if abbreviation == "-" {
+                article = try await parser.getArticleById(faculty: "-", id: id)
+            } else {
+                article = try await parser.getArticleById(faculty: abbreviation, id: id)
+            }
+            return .success(article)
         } catch {
             return .failure(error)
         }
@@ -63,52 +65,15 @@ final class ASPUNewsService {
         var newsURL = ""
         
         if abbreviation == "-"  {
-            newsURL = "http://agpu.net/news.php?ELEMENT_ID=\(index)"
+            newsURL = "https://agpu.net/news.php?ELEMENT_ID=\(index)"
         } else if abbreviation == "educationaltechnopark" {
-            newsURL = "http://www.agpu.net/struktura-vuza/educationaltechnopark/news/news.php?ELEMENT_ID=\(index)"
+            newsURL = "https://www.agpu.net/struktura-vuza/educationaltechnopark/news/news.php?ELEMENT_ID=\(index)"
         } else if abbreviation == "PedagogicalQuantorium"  {
-            newsURL = "http://www.agpu.net/struktura-vuza/PedagogicalQuantorium/news/news.php?ELEMENT_ID=\(index)"
+            newsURL = "https://www.agpu.net/struktura-vuza/PedagogicalQuantorium/news/news.php?ELEMENT_ID=\(index)"
         } else {
-            newsURL = "http://agpu.net/struktura-vuza/faculties/\(abbreviation)/news/news.php?ELEMENT_ID=\(index)"
+            newsURL = "https://agpu.net/struktura-vuza/faculties/\(abbreviation)/news/news.php?ELEMENT_ID=\(index)"
         }
         
         return newsURL
     }
-    
-    // получить URL для пагинации
-    func urlForPagination(abbreviation: String, page: Int)-> String {
-        var url = ""
-        if abbreviation != "-" {
-            url = "http://\(HostName.host)/api/news/\(abbreviation)?page=\(page)"
-            print(url)
-            return url
-        } else {
-            url = "http://\(HostName.host)/api/news?page=\(page)"
-            print(url)
-            return url
-        }
-    }
-    
-    func getArticleInfo(abbreviation: String, id: Int) async throws -> Result<ArticleInfo, Error> {
-        
-        var url = ""
-        
-        if abbreviation != "-" {
-            url = "http://\(HostName.host)/api/news/\(abbreviation)/\(id)"
-        } else {
-            url = "http://\(HostName.host)/api/news/agpu/\(id)"
-        }
-        
-        let request = URLRequest(url: URL(string: url)!)
-        
-        let data = try await URLSession.shared.data(for: request)
-        
-        do {
-            let news = try JSONDecoder().decode(ArticleInfo.self, from: data.0)
-            return .success(news)
-        } catch {
-            return .failure(error)
-        }
-    }
 }
-

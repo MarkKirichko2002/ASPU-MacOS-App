@@ -13,6 +13,7 @@ final class DateManager  {
     let dateFormatter = DateFormatter()
     
     var daysOfWeek = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+    var fullDaysOfWeek = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
     
     func getCurrentDate()-> String {
         var currentDate = ""
@@ -48,13 +49,34 @@ final class DateManager  {
         return ""
     }
     
-    func getDate(from weekDay: String)-> String {
+    func getCurrentFullDayOfWeek(date: String)-> String {
+        let calendar = Calendar.current
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        if let date = dateFormatter.date(from: date) {
+            let dayOfWeek = calendar.component(.weekday, from: date)
+            return fullDaysOfWeek[dayOfWeek - 1]
+        }
         return ""
     }
     
     func getCurrentDayOfWeek(day: Int)-> String {
         let day = daysOfWeek[day]
         return day
+    }
+    
+    func datesOfCurrentWeek()-> [String] {
+        var date = Date()
+        var dates = [Date]()
+        let calendar = Calendar.current
+        if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: date) {
+            date = weekInterval.start
+            for i in 0...6 {
+                let newDate = calendar.date(byAdding: .day, value: i, to: date) ?? Date()
+                dates.append(newDate)
+            }
+        }
+        let formmatedDates = dates.map { getFormattedDate(date: $0) }
+        return formmatedDates
     }
     
     func getFormattedDate(date: Date)-> String {
@@ -255,5 +277,27 @@ final class DateManager  {
         }
         return info
     }
+    
+    func fillDay(from: String)-> [String: String] {
+        let calendar = Calendar.current
+        var dates = [Date]()
+        var dict: [String: String] = [:]
+        var fromDate = getDateFromString(str: from, withTime: false) ?? Date()
+        if let weekInterval = calendar.dateInterval(of: .weekOfYear, for: fromDate) {
+            fromDate = weekInterval.start
+            for i in 0...5 {
+                let newDate = calendar.date(byAdding: .day, value: i, to: fromDate) ?? Date()
+                dates.append(newDate)
+            }
+        }
+        let formmatedDates = dates.map { getFormattedDate(date: $0)}
+        
+        for i in 0..<formmatedDates.count {
+            let date = formmatedDates[i]
+            let weekDay = getCurrentFullDayOfWeek(date: date)
+            dict[date] = weekDay
+        }
+        
+        return dict
+    }
 }
-

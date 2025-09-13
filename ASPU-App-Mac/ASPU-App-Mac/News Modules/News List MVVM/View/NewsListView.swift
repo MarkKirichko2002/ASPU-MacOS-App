@@ -22,7 +22,6 @@ struct NewsListView: View {
             } else {
                 List(viewModel.newsResponse.articles ?? [], id: \.id) { article in
                     ArticleCell(article: article, url: viewModel.makeUrlForArticle(index: article.id))
-                        .accentColor(.gray)
                 }
             }
         }

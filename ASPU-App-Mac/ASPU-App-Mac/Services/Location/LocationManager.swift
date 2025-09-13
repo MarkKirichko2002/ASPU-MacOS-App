@@ -13,10 +13,6 @@ final class LocationManager: NSObject {
     
     var locationHandler: ((CLLocation)->Void)?
     
-    func registerLocationHandler(block: @escaping(CLLocation)->Void) {
-        self.locationHandler = block
-    }
-    
     func getLocations() {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
@@ -34,6 +30,10 @@ final class LocationManager: NSObject {
         } else if status == .authorized || status == .authorizedAlways {
             completion(true)
         }
+    }
+    
+    func registerLocationHandler(block: @escaping(CLLocation)->Void) {
+        self.locationHandler = block
     }
 }
 

@@ -24,5 +24,5 @@ struct PairInfoView: View {
 }
 
 #Preview {
-    PairInfoView(viewModel: PairInfoViewModel(pair: Discipline(id: "", time: "", name: "", groupName: "", teacherName: "", audienceID: "", subgroup: 0, type: .all), date: ""))
+    PairInfoView(viewModel: PairInfoViewModel(pair: Discipline(time: "", name: "", groupName: "", teacherName: "", audienceID: "", subgroup: 0, type: .all), date: ""))
 }
