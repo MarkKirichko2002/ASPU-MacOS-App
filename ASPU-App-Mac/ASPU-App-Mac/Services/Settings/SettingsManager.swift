@@ -23,7 +23,7 @@ final class SettingsManager {
     }
     
     func getSavedID()-> String {
-        return UserDefaults.standard.object(forKey: "id") as? String ?? "ВМ-ИВТ-3-1"
+        return UserDefaults.standard.object(forKey: "id") as? String ?? "ВМ-ИВТ-4-1"
     }
     
     func saveTimetableOwner(owner: String) {

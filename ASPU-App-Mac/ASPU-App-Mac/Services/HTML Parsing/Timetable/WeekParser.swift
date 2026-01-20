@@ -14,18 +14,17 @@ class GetWeeksService {
     
     let dateManager = DateManager()
     
-    func collectWeeks() -> [WeekModel] {
+    func collectWeeks()-> [WeekModel] {
+        
         var weeks: [WeekModel] = []
         
-        // Получаем текущую дату
-        let now = Date()
         let calendar = Calendar.current
-        
-        // Находим первую неделю сентября текущего года с буднями
-        var components = calendar.dateComponents([.year], from: now)
+        var components = DateComponents()
         components.month = 9
         components.day = 1
-        guard let firstSeptember = calendar.date(from: components) else { return weeks }
+        components.year = 2025
+        
+        guard let firstSeptember = calendar.date(from: components) else { return weeks}
         
         // Ищем первый понедельник сентября
         var firstWeekStart = firstSeptember
@@ -50,7 +49,6 @@ class GetWeeksService {
             }
         }
         
-        // Устанавливаем конец диапазона - последняя неделя августа следующего года
         components.year! += 1
         components.month = 7
         components.day = 5
