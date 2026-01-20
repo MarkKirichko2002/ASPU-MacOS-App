@@ -1,5 +1,5 @@
 //
-//  NewsSettingsOptionCell.swift
+//  NewsSettingsOptionsListView.swift
 //  ASPU-App-Mac
 //
 //  Created by Марк Киричко on 01.06.2025.
@@ -21,7 +21,7 @@ enum ImageShapes: String, Codable, CaseIterable, Hashable {
     }
 }
 
-struct NewsSettingsOptionCell: View {
+struct NewsSettingsOptionsListView: View {
     
     @AppStorage("image shape") var shape = ImageShapes.square
     @AppStorage("image line width") var width = 0.0
@@ -79,9 +79,10 @@ struct NewsSettingsOptionCell: View {
                 }
             }
         }.padding(30)
+            .navigationTitle("Ячейка новости")
     }
 }
 
 #Preview {
-    NewsSettingsOptionCell()
+    NewsSettingsOptionsListView()
 }

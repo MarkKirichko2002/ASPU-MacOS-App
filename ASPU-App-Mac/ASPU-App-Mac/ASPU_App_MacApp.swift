@@ -37,5 +37,11 @@ struct ASPU_App_MacApp: App {
             DaysListView(viewModel: DaysListViewModel(id: storage.viewModel.id, currentDate: storage.viewModel.date, owner: storage.viewModel.owner))
                 .environmentObject(storage)
         }
+        Window("", id: "news cell") {
+            NewsSettingsOptionsListView()
+        }
+        Window("", id: "maps") {
+            SelectedMapStyleOptionCell()
+        }
     }
 }

@@ -33,6 +33,7 @@ struct SelectedMapStyleOptionCell: View {
                 }
             }
         }.padding(30)
+            .navigationTitle("Ячейка новости")
     }
 }
 
