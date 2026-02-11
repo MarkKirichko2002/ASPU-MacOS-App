@@ -10,5 +10,5 @@ import Foundation
 struct WeekModel: Identifiable, Codable {
     let id: Int
     let from, to: String
-    let dayNames: [String: String]
+    var dayNames: [String: String]
 }

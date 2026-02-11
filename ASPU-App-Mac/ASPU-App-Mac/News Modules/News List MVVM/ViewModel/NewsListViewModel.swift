@@ -5,7 +5,15 @@
 //  Created by Марк Киричко on 14.08.2024.
 //
 
-import Foundation
+import SwiftUI
+
+enum FilterType: String, CaseIterable {
+    case today = "Сегодня"
+    case yesterday = "Вчера"
+    case dayBeforeYesterday = "Позавчера"
+    case currentWeek = "Текущая неделя"
+    case all = "Все новости"
+}
 
 final class NewsListViewModel: ObservableObject {
     
@@ -14,25 +22,37 @@ final class NewsListViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var currentCategory = NewsCategories.categories[0]
     @Published var currentPage = 1
-    @Published var searchText = ""
+    @Published var searchText: String = "" {
+        didSet {
+            if searchText.isEmpty {
+                newsResponse.articles = allNews
+            } else {
+                newsResponse.articles = SearchNews()
+            }
+            return newsResponse.articles = SearchNews()
+        }
+    }
+    @Published var date = Date()
+    @Published var currentType = FilterType.all
+    @AppStorage("news category") var abbreviation = NewsCategories.categories[0].abbreviation
+    @Published var isDateSelected = false
+    @Published var isDatePresented = false
     
-    var abbreviation = "-"
+    var allNews = [Article]()
+    var types = FilterType.allCases
     
     // MARK: - сервисы
     private let newsService = ASPUNewsService()
+    private let dateManager = DateManager()
     private let settingsManager = SettingsManager()
     
     init() {
-        getNews()
         observeCategory()
     }
     
     func getNews() {
         
-        let abbreviation = settingsManager.getSavedCategory()
         currentCategory = NewsCategories.categories.first(where: { $0.abbreviation == abbreviation})!
-        
-        self.abbreviation = abbreviation
         
         if currentCategory.abbreviation != "-" {
             Task {
@@ -42,6 +62,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -58,6 +79,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -82,6 +104,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -98,6 +121,7 @@ final class NewsListViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.newsResponse = data
+                        self.allNews = data.articles ?? []
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -119,6 +143,7 @@ final class NewsListViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.newsResponse = data
+                    self.allNews = data.articles ?? []
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -126,6 +151,81 @@ final class NewsListViewModel: ObservableObject {
                 }
                 print(error)
             }
+        }
+    }
+    
+    func refreshNews() {
+        DispatchQueue.main.async {
+            self.date = Date()
+            self.currentType = .all
+        }
+        if let page = newsResponse.currentPage {
+            getNews(page: page)
+        }
+    }
+    
+    func filter(type: FilterType) {
+        DispatchQueue.main.async {
+            self.currentType = type
+            self.newsResponse.articles = self.filterNews(type: type)
+        }
+    }
+    
+    func observeCategory() {
+        NotificationCenter.default.addObserver(forName: Notification.Name("news category changed"), object: nil, queue: nil) { notification in
+            if let abbreviation = notification.object as? String {
+                self.getNews(abbreviation: abbreviation)
+            }
+        }
+    }
+    
+    func searchNews() {
+        
+        let dispatchGroup = DispatchGroup()
+        
+        guard let pages = newsResponse.countPages else {return}
+        
+        var news: Set<Article> = Set()
+        let newsQueue = DispatchQueue(label: "com.yourapp.newsQueue")
+        
+        isLoading = true
+        
+        for page in 1...pages {
+            dispatchGroup.enter()
+            Task {
+                let result = try await newsService.getNews(by: page, abbreviation: abbreviation)
+                defer { dispatchGroup.leave() }
+                switch result {
+                case .success(let data):
+                    guard let articles = data.articles else {return}
+                    newsQueue.sync {
+                        for article in articles {
+                            news.insert(article)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.isLoading = false
+            self.filterNews(by: self.date, arr: Array(news))
+        }
+    }
+    
+    func filterNews(by date: Date, arr: [Article]) {
+        self.date = date
+        let filteredNews = arr.filter({ $0.date == dateManager.getFormattedDate(date: date)})
+        newsResponse.articles = filteredNews
+    }
+    
+    func makeNavigationTitle()-> String {
+        if isLoading {
+            return "Загрузка..."
+        } else {
+            return currentCategory.name
         }
     }
     
@@ -142,16 +242,39 @@ final class NewsListViewModel: ObservableObject {
     
     func SearchNews()-> [Article] {
         if searchText.isEmpty {
-            return newsResponse.articles ?? []
+            allNews = newsResponse.articles ?? []
+            return allNews
         } else {
-            guard let news = newsResponse.articles else {return []}
-            return news.filter { $0.title!.localizedCaseInsensitiveContains(searchText) }
+            let filteredNews = allNews.filter { $0.title!.lowercased().contains(searchText) }
+            DispatchQueue.main.async {
+                self.currentType = .all
+            }
+            return filteredNews
         }
     }
     
-    func observeCategory() {
-        NotificationCenter.default.addObserver(forName: Notification.Name("category"), object: nil, queue: nil) { _ in
-            self.getNews()
+    func makeUrlForArticle(index: Int)-> String {
+        return newsService.urlForCurrentArticle(abbreviation: abbreviation, index: index)
+    }
+    
+    func filterNews(type: FilterType)-> [Article] {
+        switch type {
+        case .today:
+            return allNews.filter({ $0.date == dateManager.getCurrentDate()})
+        case .yesterday:
+            let today = dateManager.getCurrentDate()
+            let yesterday = dateManager.previousDay(date: today)
+            return allNews.filter({ $0.date == yesterday})
+        case .dayBeforeYesterday:
+            let today = dateManager.getCurrentDate()
+            let yesterday = dateManager.previousDay(date: today)
+            let dayBeforeYesterday = dateManager.previousDay(date: yesterday)
+            return allNews.filter({ $0.date == dayBeforeYesterday})
+        case .currentWeek:
+            let dates = dateManager.datesOfCurrentWeek()
+            return allNews.filter { dates.contains($0.date ?? "") }
+        case .all:
+            return allNews
         }
     }
 }
